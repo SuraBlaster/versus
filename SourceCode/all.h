@@ -21,6 +21,8 @@
 #include "obj2d.h"
 #include "sprite_data.h"
 
+#include "bg.h"
+
 #include "player.h"
 
 #include "scene.h"

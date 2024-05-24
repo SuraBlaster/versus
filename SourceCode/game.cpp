@@ -126,15 +126,7 @@ void Game::draw()
         window::getWidth(), window::getHeight()-GROUND_POS_Y,0,0,ToRadian(0)
     ,1,0,0);
 
-    for (int i = 0; i < TERRAIN_NUM; ++i)
-    {
-        primitive::rect(
-            terrai[i].pos,
-            terrai[i].hsize * 2,
-            terrai[i].hsize, 0,
-            { 1, 1, 1, 1 }
-        );
-    }
+    bg()->drawTitBack();
 
     // ƒvƒŒƒCƒ„[‚Ì•`‰æ
     playerManager()->draw();

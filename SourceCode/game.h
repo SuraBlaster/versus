@@ -33,13 +33,15 @@ public:
     // ゲッターは後ろに_をつけない
     PlayerManager*      playerManager()     { return playerManager_; }
 
-    
+    BG* bg() { return bg_; }
 
 private:
     bool                isPaused;
 
     // メンバ変数は後ろに_をつける
     PlayerManager*      playerManager_;
+
+    BG*                 bg_;
 
     static Game instance_;
 };

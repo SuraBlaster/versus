@@ -111,6 +111,9 @@
     <ClInclude Include="GameLib\depth_stencil.h">
       <Filter>GameLib\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\bg.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameLib\primitive.hlsli">
@@ -221,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="GameLib\wnd_proc.cpp">
       <Filter>GameLib\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\bg.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
