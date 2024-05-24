@@ -16,7 +16,8 @@ using namespace GameLib;
 
 // 2D画像ロードデータ
 LoadTexture loadTexture[] = {
-    { TEXNO::PLAYER,    L"./Data/Images/player.png",    1U },// プレイヤー
+   { TEXNO::PLAYER,     L"./Data/Images/player.png",    1U },// プレイヤー
+    { TEXNO::BACK_WHITE, L"./Data/Images/White.png",     1U },//白い背景
     { -1, nullptr }	// 終了フラグ
 };
 

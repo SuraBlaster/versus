@@ -15,6 +15,8 @@ enum TEXNO
 {
     // ÉQÅ[ÉÄ
     PLAYER,
+    BACK_WHITE,
+    BACK_BLACK,
 };
 
 extern GameLib::LoadTexture loadTexture[];
