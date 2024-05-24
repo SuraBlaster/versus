@@ -38,6 +38,7 @@ public:
 private:
     bool                isPaused;
 
+    int BackGround;
     // ƒƒ“ƒo•Ï”‚ÍŒã‚ë‚É_‚ğ‚Â‚¯‚é
     PlayerManager*      playerManager_;
 

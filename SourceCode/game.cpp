@@ -25,6 +25,8 @@ void Game::init()
     playerManager_      = new PlayerManager;
 
     isPaused = false;   // ポーズフラグの初期化
+
+    BackGround = 960;
 }
 
 //--------------------------------
@@ -57,6 +59,23 @@ void Game::update()
         return;
     }
 
+    if (TRG(0) & PAD_TRG1)
+    {
+        if (BackGround > 0)
+        {
+            while (BackGround = 0)
+            {
+                BackGround--;
+            }
+        }
+        else
+        {
+            while (BackGround < 960)
+            {
+                BackGround++;
+            }
+        }
+    }
     // デバッグ文字列表示
     debug::setString("state:%d", state);
     debug::setString("timer:%d", timer);
@@ -135,7 +154,7 @@ void Game::draw()
 
     GameLib::texture::begin(TEXNO::BACK_BLACK);
     GameLib::texture::draw(TEXNO::BACK_BLACK,
-        960, 0,//位置
+        BackGround, 0,//位置
         1, 1,       //大きさ
         0, 0,       //切り抜き位置
         960, 1080, //切り抜きサイズ

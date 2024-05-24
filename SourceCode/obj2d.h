@@ -74,7 +74,7 @@ public:
     bool                    judgeFlag;          // あたり判定の有無（true:有り / false:無し）
     BYTE                    pad[1];             // 1バイトの空き
 
-    
+
 public:
 
     OBJ2D();        // コンストラクタ
