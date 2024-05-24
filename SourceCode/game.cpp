@@ -122,6 +122,29 @@ void Game::draw()
 //******************************************************************************
 #endif
     //TODO_02 地面の描画
+    GameLib::texture::begin(TEXNO::BACK_WHITE);
+    GameLib::texture::draw(TEXNO::BACK_WHITE,
+        0, 0,//位置
+        1, 1,       //大きさ
+        0, 0,       //切り抜き位置
+        1980, 1080, //切り抜きサイズ
+        0, 0,
+        0
+    );
+    GameLib::texture::end(TEXNO::BACK_WHITE);
+
+    GameLib::texture::begin(TEXNO::BACK_BLACK);
+    GameLib::texture::draw(TEXNO::BACK_BLACK,
+        960, 0,//位置
+        1, 1,       //大きさ
+        0, 0,       //切り抜き位置
+        960, 1080, //切り抜きサイズ
+        0, 0,
+        0
+    );
+    GameLib::texture::end(TEXNO::BACK_BLACK);
+
+
     primitive::rect(0, GROUND_POS_Y,
         window::getWidth(), window::getHeight()-GROUND_POS_Y,0,0,ToRadian(0)
     ,1,0,0);

@@ -15,6 +15,8 @@ enum TEXNO
 {
     // ÉQÅ[ÉÄ
     PLAYER,
+    BACK_WHITE,
+    BACK_BLACK,
 };
 
 extern GameLib::LoadTexture loadTexture[];
@@ -39,6 +41,7 @@ extern GameLib::SpriteData sprPlayer_Down2;
 extern GameLib::SpriteData sprPlayer_Left0;
 extern GameLib::SpriteData sprPlayer_Left1;
 extern GameLib::SpriteData sprPlayer_Left2;
+
 
 //******************************************************************************
 #endif // !INCLUDED_SPRITE_DATA
