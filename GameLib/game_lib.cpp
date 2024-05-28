@@ -39,7 +39,7 @@
 #include "depth_stencil.h"
 
 const float FRAME_BUFFER_W = 1920;
-const float FRAME_BUFFER_H = 1280;
+const float FRAME_BUFFER_H = 1080;
 
 
 namespace GameLib
@@ -52,6 +52,7 @@ namespace GameLib
         HWND hwnd                                   = 0;  // ウインドウハンドル
         int  width                                  = 0;    // ウインドウの幅
         int  height                                 = 0;    // ウインドウの高さ
+
 
         // DirectX11関連
         ID3D11Device*           device              = nullptr;
@@ -522,29 +523,19 @@ namespace GameLib
         if (FAILED(hr)) return E_FAIL;
 
         //Setup the viewport
-        D3D11_VIEWPORT vp[2];
+        D3D11_VIEWPORT vp;
         {
-            vp[0].Width = FRAME_BUFFER_W / 2;//幅
-            vp[0].Height = FRAME_BUFFER_H;//高さ
-            vp[0].MinDepth = 0.0f;
-            vp[0].MaxDepth = 1.0f;
-            vp[0].TopLeftX = 0;
-            vp[0].TopLeftY = 0;
-
-            vp[1].Width = FRAME_BUFFER_W / 2;//幅
-            vp[1].Height = FRAME_BUFFER_H;//高さ
-            vp[1].MinDepth = 0.0f;
-            vp[1].MaxDepth = 1.0f;
-            vp[1].TopLeftX = FRAME_BUFFER_W / 2;
-            vp[1].TopLeftY = 0;
-
-
+            vp.Width = (float)width;//幅
+            vp.Height = (float)height;//高さ
+            vp.MinDepth = 0.0f;
+            vp.MaxDepth = 1.0f;
+            vp.TopLeftX = 0;
+            vp.TopLeftY = 0;
 
         }
-        for (int i = 0; i < sizeof(vp) / sizeof(vp[0]); i++) 
-        {
-            m.context->RSSetViewports(1, &vp[i]);
-        }
+        
+        m.context->RSSetViewports(1, &vp);
+        
         
         m.context->OMSetRenderTargets(1, &m.renderTargetView, m.depthStencilView);
 

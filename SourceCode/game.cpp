@@ -101,6 +101,7 @@ void Game::update()
 
         // プレイヤー（自分で操作）を追加する
         playerManager()->add(&player, VECTOR2(window::getWidth() / 2, window::getHeight() / 2));
+        playerManager()->add(&player, VECTOR2(window::getWidth() / 2, 700));
 
         state++;    // 初期化処理の終了
 
@@ -164,8 +165,8 @@ void Game::draw()
     GameLib::texture::end(TEXNO::BACK_BLACK);
 
 
-    primitive::rect(0, GROUND_POS_Y,
-        window::getWidth(), window::getHeight()-GROUND_POS_Y,0,0,ToRadian(0)
+    primitive::rect(0, UNDER_GROUND_POS_Y,
+        window::getWidth(), window::getHeight()-UNDER_GROUND_POS_Y,0,0,ToRadian(0)
     ,1,0,0);
 
     

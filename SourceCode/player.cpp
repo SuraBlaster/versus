@@ -141,11 +141,19 @@ void Player::move(OBJ2D *obj)
         obj->speed.y = (std::max)(obj->speed.y, -SPEED_MAX_Y);
         obj->position.y += obj->speed.y;
      
-        if (obj->position.y > Game::GROUND_POS_Y)
+        /*if (obj->position.y > Game::UPPER_GROUND_POS_Y)
         {
             onGround = true;
-            obj->position.y = Game::GROUND_POS_Y;
+            obj->position.y = Game::UPPER_GROUND_POS_Y;
+        }*/
+
+        if (obj->position.y > Game::UNDER_GROUND_POS_Y)
+        {
+            onGround = true;
+            obj->position.y = Game::UNDER_GROUND_POS_Y;
         }
+
+
 #if 3
 //******************************************************************************
 // TODO:03 プレイヤーの移動（X方向）

@@ -20,7 +20,8 @@ class Game : public Scene
 public:
     // クラス内での定数の定義の仕方
     // int型であればconstで良いが、それ以外はconstexprを使用する
-    static constexpr float GROUND_POS_Y = 980.0f;
+    static constexpr float UPPER_GROUND_POS_Y = 480.0f;
+    static constexpr float UNDER_GROUND_POS_Y = 980.0f;
 
 public:
     static Game* instance() { return &instance_; }
