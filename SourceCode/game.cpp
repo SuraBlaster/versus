@@ -126,7 +126,7 @@ void Game::draw()
         window::getWidth(), window::getHeight()-GROUND_POS_Y,0,0,ToRadian(0)
     ,1,0,0);
 
-    bg()->drawTitBack();
+    bg()->drawGameBack();
 
     // ƒvƒŒƒCƒ„[‚Ì•`‰æ
     playerManager()->draw();
