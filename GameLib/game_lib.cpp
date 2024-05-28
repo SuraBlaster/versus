@@ -38,6 +38,10 @@
 #include "view_settings.h"
 #include "depth_stencil.h"
 
+const float FRAME_BUFFER_W = 1920;
+const float FRAME_BUFFER_H = 1280;
+
+
 namespace GameLib
 {
 
@@ -518,14 +522,30 @@ namespace GameLib
         if (FAILED(hr)) return E_FAIL;
 
         //Setup the viewport
-        D3D11_VIEWPORT vp;
-        vp.Width = (FLOAT)width;//ïù
-        vp.Height = (FLOAT)height;//çÇÇ≥
-        vp.MinDepth = 0.0f;
-        vp.MaxDepth = 1.0f;
-        vp.TopLeftX = 0;
-        vp.TopLeftY = 0;
-        m.context->RSSetViewports(1, &vp);
+        D3D11_VIEWPORT vp[2];
+        {
+            vp[0].Width = FRAME_BUFFER_W / 2;//ïù
+            vp[0].Height = FRAME_BUFFER_H;//çÇÇ≥
+            vp[0].MinDepth = 0.0f;
+            vp[0].MaxDepth = 1.0f;
+            vp[0].TopLeftX = 0;
+            vp[0].TopLeftY = 0;
+
+            vp[1].Width = FRAME_BUFFER_W / 2;//ïù
+            vp[1].Height = FRAME_BUFFER_H;//çÇÇ≥
+            vp[1].MinDepth = 0.0f;
+            vp[1].MaxDepth = 1.0f;
+            vp[1].TopLeftX = FRAME_BUFFER_W / 2;
+            vp[1].TopLeftY = 0;
+
+
+
+        }
+        for (int i = 0; i < sizeof(vp) / sizeof(vp[0]); i++) 
+        {
+            m.context->RSSetViewports(1, &vp[i]);
+        }
+        
         m.context->OMSetRenderTargets(1, &m.renderTargetView, m.depthStencilView);
 
         m.blender = new Blender(m.device);
