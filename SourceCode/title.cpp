@@ -8,7 +8,7 @@
 
 //------< インクルード >---------------------------------------------------------
 #include "all.h"
-
+#include"stage.h"
 //------< using >---------------------------------------------------------------
 using namespace GameLib;
 
@@ -39,7 +39,7 @@ void Title::update()
         timer++;                            // タイマーを足す
 
         if (TRG(0) & PAD_START)             // PAD_TRG1が押されたら
-            changeScene(Game::instance());  // ゲームシーンに切り替え
+            changeScene(Stage::instance());  // ゲームシーンに切り替え
 
         break;
     }

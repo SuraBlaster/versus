@@ -178,6 +178,8 @@
     <ClInclude Include="SourceCode\obj2d.h" />
     <ClInclude Include="SourceCode\player.h" />
     <ClInclude Include="SourceCode\sprite_data.h" />
+    <ClInclude Include="SourceCode\stage.h" />
+    <ClInclude Include="SourceCode\stage1.h" />
     <ClInclude Include="SourceCode\user.h" />
     <ClInclude Include="SourceCode\scene.h" />
     <ClInclude Include="SourceCode\title.h" />
@@ -292,6 +294,8 @@
     <ClCompile Include="SourceCode\player.cpp" />
     <ClCompile Include="SourceCode\scene.cpp" />
     <ClCompile Include="SourceCode\sprite_data.cpp" />
+    <ClCompile Include="SourceCode\stage.cpp" />
+    <ClCompile Include="SourceCode\stage1.cpp" />
     <ClCompile Include="SourceCode\title.cpp" />
     <ClCompile Include="SourceCode\work.cpp" />
   </ItemGroup>
