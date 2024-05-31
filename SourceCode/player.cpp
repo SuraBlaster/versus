@@ -129,31 +129,38 @@ void Player::move(OBJ2D *obj)
         //TODO_01 プレイヤーの移動（Y方向）
         obj->speed.y += KASOKU;
 
-        /*if (obj->speed.y > SPEED_MAX_Y)
-        {
-            obj->speed.y = SPEED_MAX_Y;
-        }*/
         obj->speed.y = (std::min)(obj->speed.y, SPEED_MAX_Y);
-        /*if (obj->speed.y < -SPEED_MAX_Y)
-        {
-            obj->speed.y = -SPEED_MAX_Y;
-        }*/
+ 
         obj->speed.y = (std::max)(obj->speed.y, -SPEED_MAX_Y);
         obj->position.y += obj->speed.y;
-     
-        /*if (obj->position.y > Game::UPPER_GROUND_POS_Y)
-        {
-            onGround = true;
-            obj->position.y = Game::UPPER_GROUND_POS_Y;
-        }*/
 
-        if (obj->position.y > Game::UNDER_GROUND_POS_Y)
+
+        for (int i = 0; i < TERRAIN_NUM; ++i)
         {
-            onGround = true;
-            obj->position.y = Game::UNDER_GROUND_POS_Y;
+            if (Game::instance()->bgManager()->hitCheck(terrain[i],obj))
+            {
+                float dist;
+                if (obj->speed.y >= 0)
+                    dist = Game::instance()->bgManager()->checkDown(terrain[i], obj);
+                else
+                    dist = Game::instance()->bgManager()->checkUp(terrain[i], obj);
+                obj->position.y += dist;
+                obj->speed.y = 0;
+            }
         }
 
-
+        for (int i = 0; i < TERRAIN_NUM; ++i) {
+            if (Game::instance()->bgManager()->hitCheck(terrain[i], obj)) {
+                float dist;
+                if (obj->speed.x > 0)
+                    dist = Game::instance()->bgManager()->checkRight(terrain[i], obj);
+                else
+                    dist = Game::instance()->bgManager()->checkLeft(terrain[i], obj);
+                obj->position.x += dist;
+                obj->speed.x = 0;
+            }
+        }
+        
 #if 3
 //******************************************************************************
 // TODO:03 プレイヤーの移動（X方向）
@@ -352,6 +359,9 @@ void Player::move(OBJ2D *obj)
 
         break;
     }
+
+
+
 
     // アニメーション更新
     if (animeData)

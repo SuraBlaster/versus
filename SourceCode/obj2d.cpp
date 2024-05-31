@@ -176,6 +176,8 @@ void OBJ2DManager::update()
             it = objList.erase(it);
         }
     }
+
+    
 }
 
 

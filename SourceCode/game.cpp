@@ -15,6 +15,7 @@ using namespace GameLib;
 //------< 変数 >----------------------------------------------------------------
 Game Game::instance_;
 
+
 //--------------------------------
 //  初期化処理
 //--------------------------------
@@ -23,10 +24,12 @@ void Game::init()
     Scene::init();	    // 基底クラスのinitを呼ぶ
 
     playerManager_      = new PlayerManager;
-
+    obj2d_ = new OBJ2D;
     isPaused = false;   // ポーズフラグの初期化
 
     BackGround = 960;
+
+    
 }
 
 //--------------------------------
@@ -101,7 +104,9 @@ void Game::update()
 
         // プレイヤー（自分で操作）を追加する
         playerManager()->add(&player, VECTOR2(window::getWidth() / 2, window::getHeight() / 2));
-        playerManager()->add(&player, VECTOR2(window::getWidth() / 2, 700));
+        
+
+        
 
         state++;    // 初期化処理の終了
 
@@ -111,6 +116,8 @@ void Game::update()
         //////// 通常時の処理 ////////
 
         timer++;
+
+        
 
         // プレイヤーの更新
         playerManager()->update();
@@ -170,6 +177,17 @@ void Game::draw()
     ,1,0,0);
 
     
+    
+
+    for (int i = 0; i < TERRAIN_NUM; ++i)
+    {
+        primitive::rect(
+            terrain[i].pos,
+            terrain[i].hsize * 2,
+            terrain[i].hsize, 0,
+            { 1, 1, 1, 1 }
+        );
+    }
 
     // プレイヤーの描画
     playerManager()->draw();

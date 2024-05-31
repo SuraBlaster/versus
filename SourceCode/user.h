@@ -1,5 +1,4 @@
-#ifndef INCLUDED_USER
-#define INCLUDED_USER
+#pragma once
 
 //******************************************************************************
 //
@@ -90,4 +89,4 @@ inline const float& clamp(const float& v, const float& lo,
     
 }
 
-#endif // !INCLUDED_USER
+

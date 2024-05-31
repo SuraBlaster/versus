@@ -1,5 +1,4 @@
-#ifndef INCLUDED_SPRITE_DATA
-#define	INCLUDED_SPRITE_DATA
+#pragma once
 //******************************************************************************
 //
 //
@@ -44,4 +43,4 @@ extern GameLib::SpriteData sprPlayer_Left2;
 
 
 //******************************************************************************
-#endif // !INCLUDED_SPRITE_DATA
+

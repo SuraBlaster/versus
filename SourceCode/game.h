@@ -1,5 +1,4 @@
-#ifndef INCLUDED_GAME
-#define	INCLUDED_GAME
+#pragma once
 
 //******************************************************************************
 //
@@ -33,7 +32,8 @@ public:
 
     // ゲッターは後ろに_をつけない
     PlayerManager*      playerManager()     { return playerManager_; }
-
+    OBJ2D* obj2D(){ return obj2d_; }
+    BG* bgManager() { return bgManager_; }
     
 
 private:
@@ -42,10 +42,10 @@ private:
     int BackGround;
     // メンバ変数は後ろに_をつける
     PlayerManager*      playerManager_;
-
+    OBJ2D* obj2d_;
+    BG* bgManager_;
     static Game instance_;
 };
 
 //******************************************************************************
 
-#endif // !INCLUDED_GAME

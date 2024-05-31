@@ -1,5 +1,4 @@
-#ifndef INCLUDED_OBJ2D
-#define	INCLUDED_OBJ2D
+#pragma once
 //******************************************************************************
 //
 //
@@ -14,7 +13,7 @@
 #include "../GameLib/obj2d_data.h"
 
 
-#define TERRAIN_NUM (10)
+#define TERRAIN_NUM (12)
 // 前方宣言
 class OBJ2D;
 
@@ -74,7 +73,8 @@ public:
     bool                    judgeFlag;          // あたり判定の有無（true:有り / false:無し）
     BYTE                    pad[1];             // 1バイトの空き
 
-
+    
+    
 public:
 
     OBJ2D();        // コンストラクタ
@@ -82,8 +82,12 @@ public:
     void move();    // 移動
     void draw();    // 描画
 
+    
+
     bool animeUpdate(GameLib::AnimeData* animeData);    // アニメーションのアップデート
 };
+
+
 
 //==============================================================================
 
@@ -102,8 +106,15 @@ public:
 
     OBJ2D* add(MoveAlg* mvAlg, const VECTOR2& pos = VECTOR2(0, 0)); // objListに新たなOBJ2Dを追加する
     std::list<OBJ2D>* getList() { return &objList; }                // objListを取得する
+
+};
+
+struct object
+{
+    VECTOR2 pos;
+    VECTOR2 hsize;
+
+    float speed;
 };
 
 //******************************************************************************
-
-#endif// ! INCLUDED_OBJ2D
