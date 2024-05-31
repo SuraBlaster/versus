@@ -29,7 +29,6 @@ void Game::init()
 
     BackGround = 960;
 
-    
 }
 
 //--------------------------------
@@ -103,7 +102,7 @@ void Game::update()
         playerManager()->init();
 
         // プレイヤー（自分で操作）を追加する
-        playerManager()->add(&player, VECTOR2(window::getWidth() / 2, window::getHeight() / 2));
+        playerManager()->add(&player, VECTOR2(window::getWidth() / 3, window::getHeight() / 2));
         
 
         
@@ -172,9 +171,9 @@ void Game::draw()
     GameLib::texture::end(TEXNO::BACK_BLACK);
 
 
-    primitive::rect(0, UNDER_GROUND_POS_Y,
+    /*primitive::rect(0, UNDER_GROUND_POS_Y,
         window::getWidth(), window::getHeight()-UNDER_GROUND_POS_Y,0,0,ToRadian(0)
-    ,1,0,0);
+    ,1,0,0);*/
 
     
     object terrain[] = {

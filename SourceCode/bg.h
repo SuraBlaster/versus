@@ -27,7 +27,6 @@ public:
 	float checkRight(object, OBJ2D*);
 	float checkLeft(object, OBJ2D*);
 
-	void atarihantei(object, OBJ2D* obj);
 private:
 	void drawOpBack1(int texNo);
 	void drawOpBack2(int texNo);

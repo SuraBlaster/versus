@@ -89,7 +89,7 @@ void Player::move(OBJ2D *obj)
         animeData = animePlayer_Down;   // 初期値として下向きのアニメを設定する
 
         // サイズ設定（足元が中心であるため、幅はあたりとして使用する半分・縦はそのままが扱いやすい）
-        obj->size = VECTOR2(96 / 2, 128 - 2);
+        obj->size = VECTOR2(96 / 2, 128 / 64);
 
         obj->state++;
 
