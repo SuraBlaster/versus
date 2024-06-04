@@ -53,24 +53,42 @@ void Stage::update()
 
 void Stage::draw()
 {
-    GameLib::clear(VECTOR4(0.8f, 0.3f, 1.0f, 1));
+    GameLib::clear(VECTOR4(1, 1, 1, 1));
+
+   
+
     switch (table)
     {
     case 0:
         if (timer / 40 % 2)
         {
-            primitive::rect(200, 500, 300, 300,0,0, 0, 1, 1, 1, 0.2f);
+            
+            primitive::rect(200, 500, 300, 300, 0, 0, 0, 0, 0, 0, 1);
+
             font::textOut(4, "1", { 480, 540 }, { 2, 2 }, { 1, 0.5f, 0, 1 });
         }
+        primitive::rect(900, 500, 300, 300, 0, 0, 0, 0, 0, 0, 1);
+        primitive::rect(1600, 500, 300, 300, 0, 0, 0, 0, 0, 0, 1);
         break;
     case 1:
-       
-            primitive::rect(900, 500, 300, 300, 0, 0, 0, 1, 1, 1, 0.2f);
+            
             if (timer / 40 % 2)
             {
+                primitive::rect(900, 500, 300, 300, 0, 0, 0, 0, 0, 0, 1);
                 font::textOut(4, "2", { 700, 540 }, { 2, 2 }, { 1, 0.5f, 0, 1 });
             }
-        
+            primitive::rect(200, 500, 300, 300, 0, 0, 0, 0, 0, 0, 1);
+            primitive::rect(1600, 500, 300, 300, 0, 0, 0, 0, 0, 0, 1);
+        break;
+     case 2:
+            
+            if (timer / 40 % 2)
+            {
+            primitive::rect(1600, 500, 300, 300, 0, 0, 0, 0, 0, 0, 1);
+                font::textOut(4, "2", { 700, 540 }, { 2, 2 }, { 1, 0.5f, 0, 1 });
+            }
+            primitive::rect(200, 500, 300, 300, 0, 0, 0, 0, 0, 0, 1);
+            primitive::rect(900, 500, 300, 300, 0, 0, 0, 0, 0, 0, 1);
         break;
     }
 }
