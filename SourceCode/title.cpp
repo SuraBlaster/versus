@@ -14,7 +14,7 @@ using namespace GameLib;
 
 //------< 変数 >----------------------------------------------------------------
 Title Title::instance_;
-
+Sprite* sprtitle;
 //--------------------------------
 //  更新処理
 //--------------------------------
@@ -29,6 +29,7 @@ void Title::update()
 
         timer = 0;                                  // タイマーを初期化
         GameLib::setBlendMode(Blender::BS_ALPHA);   // 通常のアルファ処理
+        sprtitle=sprite_load(L"./Data/Images/revarse.png");
         state++;                                    // 初期化処理の終了
 
         /*fallthrough*/                             // 意図的にbreak;を記述していない
@@ -52,6 +53,7 @@ void Title::draw()
 {
     // 画面クリア
     GameLib::clear(VECTOR4(0.2f, 0.3f, 1.0f, 1));
+    sprite_render(sprtitle, 0, 0);
 
     // タイトル表示
     font::textOut(4, "ECC COMP", { 60, 60 }, { 4, 4 }, { 1, 1, 0, 1 });

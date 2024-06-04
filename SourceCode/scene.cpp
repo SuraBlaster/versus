@@ -77,7 +77,7 @@ void SceneManager::execute(Scene* scene)
                                 //（Releaseモードのみ）
 
     // ゲームライブラリの初期化処理
-    GameLib::init(L"ゲームプログラミングⅡ", 1920, 1280, isFullScreen);
+    GameLib::init(L"ゲームプログラミングⅡ", 1920, 1080, isFullScreen);
 
 #ifndef _DEBUG
     ShowCursor(!isFullScreen);	// フルスクリーン時はカーソルを消す
