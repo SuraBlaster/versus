@@ -27,6 +27,7 @@ public:
 	float checkRight(OBJ2D* ,object);
 	float checkLeft(OBJ2D* ,object);
 
+	
 private:
 	void drawOpBack1(int texNo);
 	void drawOpBack2(int texNo);

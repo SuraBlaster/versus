@@ -84,7 +84,7 @@ void Player::move(OBJ2D *obj)
         animeData = animePlayer_Down;   // 初期値として下向きのアニメを設定する
 
         // サイズ設定（足元が中心であるため、幅はあたりとして使用する半分・縦はそのままが扱いやすい）
-        obj->size = VECTOR2(96 / 2, 128);
+        obj->size = VECTOR2(96 / 3, 128);
 
         obj->state++;
 
@@ -143,8 +143,10 @@ void Player::move(OBJ2D *obj)
             if (Game::instance()->bgManager()->hitCheck(obj,terrain[i]))
             {
                 float dist;
-                if (obj->speed.y >= 0)
-                    dist = Game::instance()->bgManager()->checkDown(obj,terrain[i]);
+                if (obj->speed.y >= 0) {
+                    dist = Game::instance()->bgManager()->checkDown(obj, terrain[i]);
+                    onGround = true;
+                }
                 else
                     dist = Game::instance()->bgManager()->checkUp(obj,terrain[i]);
                 obj->position.y += dist;
@@ -153,7 +155,24 @@ void Player::move(OBJ2D *obj)
             }
         }
 
-        
+       for (int i = 0; i < TERRAIN_NUM; ++i)
+        {
+            if (Game::instance()->bgManager()->hitCheck(obj,terrain2[i]))
+            {
+                float dist;
+                if (obj->speed.y >= 0) {
+                    dist = Game::instance()->bgManager()->checkDown(obj, terrain2[i]);
+                    onGround = true;
+                }
+                else
+                    dist = Game::instance()->bgManager()->checkUp(obj,terrain2[i]);
+                obj->position.y += dist;
+                obj->speed.y = 0;
+                
+            }
+        }
+
+       
         
 #if 3
 //******************************************************************************
@@ -270,6 +289,20 @@ void Player::move(OBJ2D *obj)
                 
             }
         }
+
+        for (int i = 0; i < TERRAIN_NUM; ++i) {
+            if (Game::instance()->bgManager()->hitCheck(obj,terrain2[i])) {
+                float dist;
+                if (obj->speed.x > 0)
+                    dist = Game::instance()->bgManager()->checkRight(obj,terrain2[i]);
+                else
+                    dist = Game::instance()->bgManager()->checkLeft(obj,terrain2[i]);
+                obj->position.x += dist;
+                obj->speed.x = 0;
+                
+            }
+        }
+
 #if 4
 //******************************************************************************
 // TODO:04 ジャンプ処理
@@ -366,7 +399,7 @@ void Player::move(OBJ2D *obj)
         break;
     }
 
-
+    
 
 
     // アニメーション更新

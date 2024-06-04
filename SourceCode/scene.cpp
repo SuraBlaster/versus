@@ -79,6 +79,8 @@ void SceneManager::execute(Scene* scene)
     // ゲームライブラリの初期化処理
     GameLib::init(L"ゲームプログラミングⅡ", 1920, 1080, isFullScreen);
 
+    audio_init();
+
 #ifndef _DEBUG
     ShowCursor(!isFullScreen);	// フルスクリーン時はカーソルを消す
 #endif
@@ -89,6 +91,8 @@ void SceneManager::execute(Scene* scene)
         scene = scene->execute();
     }
 
+    audio_deinit()
+        ;
     // ゲームライブラリの終了処理
     GameLib::uninit();
 }

@@ -78,6 +78,8 @@ void Game::update()
             }
         }
     }
+
+    
     // デバッグ文字列表示
     debug::setString("state:%d", state);
     debug::setString("timer:%d", timer);
@@ -102,7 +104,8 @@ void Game::update()
         playerManager()->init();
 
         // プレイヤー（自分で操作）を追加する
-        playerManager()->add(&player, VECTOR2(window::getWidth() / 3, window::getHeight() / 3));
+        playerManager()->add(&player[0], VECTOR2(window::getWidth() / 3, window::getHeight() / 3));
+        playerManager()->add(&player[1], VECTOR2(window::getWidth() / 3, 900));
         
 
         
@@ -184,12 +187,24 @@ void Game::draw()
             terrain[i].pos,
             terrain[i].hsize * 2,
             terrain[i].hsize, 0,
-            { 1, 1, 1, 1 }
+            { 1, 0, 1, 1 }
+        );
+    }
+
+    for (int i = 0; i < TERRAIN_NUM; ++i)
+    {
+        primitive::rect(
+            terrain2[i].pos,
+            terrain2[i].hsize * 2,
+            terrain2[i].hsize, 0,
+            { 1, 0, 1, 1 }
         );
     }
 
     // プレイヤーの描画
     playerManager()->draw();
+
+    
 }
 
 //******************************************************************************

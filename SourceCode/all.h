@@ -20,6 +20,7 @@
 #include "obj2d.h"
 #include "sprite_data.h"
 #include "bg.h"
+#include "Audio.h"
 
 #include "player.h"
 

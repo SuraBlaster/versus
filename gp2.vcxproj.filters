@@ -114,6 +114,9 @@
     <ClInclude Include="SourceCode\bg.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\Audio.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameLib\primitive.hlsli">
@@ -226,6 +229,9 @@
       <Filter>GameLib\Sources</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\bg.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Audio.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

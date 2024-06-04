@@ -29,12 +29,15 @@ void Title::update()
 
         timer = 0;                                  // タイマーを初期化
         GameLib::setBlendMode(Blender::BS_ALPHA);   // 通常のアルファ処理
+        sound::play(0,0);
+
         state++;                                    // 初期化処理の終了
 
         /*fallthrough*/                             // 意図的にbreak;を記述していない
 
     case 1:
         //////// 通常時の処理 ////////
+       
 
         timer++;                            // タイマーを足す
 

@@ -1,4 +1,5 @@
 #include "all.h"
+using namespace GameLib::input;
 #define ADJUST      (0.125f)
 
 //コンストラクタ
@@ -102,6 +103,8 @@ float BG::checkLeft(OBJ2D* rc1,object rc2)
 
     return rc2Right - rc1Left + ADJUST;
 }
+
+
 
 
 
