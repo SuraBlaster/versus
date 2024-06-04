@@ -1,5 +1,6 @@
 #include "stage1.h"
 
+Stage1 Stage1::instance_Stage1;
 void Stage1::init()
 {
 

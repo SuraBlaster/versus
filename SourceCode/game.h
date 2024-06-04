@@ -40,7 +40,7 @@ private:
 
     // ƒƒ“ƒo•Ï”‚ÍŒã‚ë‚É_‚ğ‚Â‚¯‚é
     PlayerManager*      playerManager_;
-
+    
     static Game instance_;
 };
 

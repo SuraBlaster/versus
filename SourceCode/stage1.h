@@ -4,12 +4,7 @@
 class Stage1 :public Scene
 {
 public:
-    // クラス内での定数の定義の仕方
-    // int型であればconstで良いが、それ以外はconstexprを使用する
-    static constexpr float GROUND_POS_Y = 980.0f;
-
-public:
-    static Stage1* instance() { return &instance_; }
+    static Stage1* instance() { return &instance_Stage1; }
 
     void init();
     void deinit();
@@ -27,5 +22,5 @@ private:
     // メンバ変数は後ろに_をつける
     PlayerManager* playerManager_;
 
-    static Stage1 instance_;
+    static Stage1 instance_Stage1;
 };
