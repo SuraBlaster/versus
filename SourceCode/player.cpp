@@ -18,12 +18,7 @@ using namespace GameLib;
 //
 //******************************************************************************
 
-object terrain[] = {
-    {{ 640, 700 },  { 600, 20 }, {}},
-    {{ 1220, 540 }, { 20, 180 }, {}},
-    {{ 640, 240 },  { 240, 20 }, {}},
-    {{ 640, 480 },  { 320, 20 }, {}},
-};
+
 //------< プレイヤーのアニメデータ >--------------------------------------------
 namespace
 {   // ※このデータは長いので、Visual Studioの機能で閉じられるようにnamespaceを分けている
@@ -89,7 +84,7 @@ void Player::move(OBJ2D *obj)
         animeData = animePlayer_Down;   // 初期値として下向きのアニメを設定する
 
         // サイズ設定（足元が中心であるため、幅はあたりとして使用する半分・縦はそのままが扱いやすい）
-        obj->size = VECTOR2(96 / 2, 128 / 64);
+        obj->size = VECTOR2(96 / 2, 128);
 
         obj->state++;
 
@@ -101,6 +96,8 @@ void Player::move(OBJ2D *obj)
         // 毎フレーム毎の初期設定
         onGround = false;   // 地面フラグは毎フレームの最初にfalseにしておき、地面に接していたらtrueを設定する
 
+        
+        
 #if 1
 //******************************************************************************
 // TODO:01 プレイヤーの移動（Y方向）
@@ -143,29 +140,20 @@ void Player::move(OBJ2D *obj)
 
         for (int i = 0; i < TERRAIN_NUM; ++i)
         {
-            if (Game::instance()->bgManager()->hitCheck(terrain[i],obj))
+            if (Game::instance()->bgManager()->hitCheck(obj,terrain[i]))
             {
                 float dist;
                 if (obj->speed.y >= 0)
-                    dist = Game::instance()->bgManager()->checkDown(terrain[i], obj);
+                    dist = Game::instance()->bgManager()->checkDown(obj,terrain[i]);
                 else
-                    dist = Game::instance()->bgManager()->checkUp(terrain[i], obj);
+                    dist = Game::instance()->bgManager()->checkUp(obj,terrain[i]);
                 obj->position.y += dist;
                 obj->speed.y = 0;
+                
             }
         }
 
-        for (int i = 0; i < TERRAIN_NUM; ++i) {
-            if (Game::instance()->bgManager()->hitCheck(terrain[i], obj)) {
-                float dist;
-                if (obj->speed.x > 0)
-                    dist = Game::instance()->bgManager()->checkRight(terrain[i], obj);
-                else
-                    dist = Game::instance()->bgManager()->checkLeft(terrain[i], obj);
-                obj->position.x += dist;
-                obj->speed.x = 0;
-            }
-        }
+        
         
 #if 3
 //******************************************************************************
@@ -270,6 +258,18 @@ void Player::move(OBJ2D *obj)
         //TODO_03 X方向移動
         obj->position.x += obj->speed.x;
 
+        for (int i = 0; i < TERRAIN_NUM; ++i) {
+            if (Game::instance()->bgManager()->hitCheck(obj,terrain[i])) {
+                float dist;
+                if (obj->speed.x > 0)
+                    dist = Game::instance()->bgManager()->checkRight(obj,terrain[i]);
+                else
+                    dist = Game::instance()->bgManager()->checkLeft(obj,terrain[i]);
+                obj->position.x += dist;
+                obj->speed.x = 0;
+                
+            }
+        }
 #if 4
 //******************************************************************************
 // TODO:04 ジャンプ処理

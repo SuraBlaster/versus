@@ -20,12 +20,12 @@ public:
 	void drawGameOver();
 	void drawGameClear();
 
-	bool hitCheck(object,OBJ2D*);
+	bool hitCheck(OBJ2D* ,object);
 
-	float checkDown(object, OBJ2D*);
-	float checkUp(object, OBJ2D*);
-	float checkRight(object, OBJ2D*);
-	float checkLeft(object, OBJ2D*);
+	float checkDown(OBJ2D* ,object);
+	float checkUp(OBJ2D* ,object);
+	float checkRight(OBJ2D* ,object);
+	float checkLeft(OBJ2D* ,object);
 
 private:
 	void drawOpBack1(int texNo);

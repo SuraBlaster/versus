@@ -13,7 +13,7 @@
 #include "../GameLib/obj2d_data.h"
 
 
-#define TERRAIN_NUM (12)
+#define TERRAIN_NUM (10)
 // ëOï˚êÈåæ
 class OBJ2D;
 
@@ -119,6 +119,11 @@ struct object
     float speed;
 };
 
-
+static object terrain[TERRAIN_NUM] = {
+    {{ 640, 700 },  { 600, 20 }, {}},
+    {{ 1220, 540 }, { 20, 180 }, {}},
+    {{ 640, 240 },  { 240, 20 }, {}},
+    {{ 640, 480 },  { 320, 20 }, {}},
+};
 
 //******************************************************************************

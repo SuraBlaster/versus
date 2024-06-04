@@ -102,7 +102,7 @@ void Game::update()
         playerManager()->init();
 
         // プレイヤー（自分で操作）を追加する
-        playerManager()->add(&player, VECTOR2(window::getWidth() / 3, window::getHeight() / 2));
+        playerManager()->add(&player, VECTOR2(window::getWidth() / 3, window::getHeight() / 3));
         
 
         
@@ -176,12 +176,7 @@ void Game::draw()
     ,1,0,0);*/
 
     
-    object terrain[] = {
-    {{ 640, 700 },  { 600, 20 }, {}},
-    {{ 1220, 540 }, { 20, 180 }, {}},
-    {{ 640, 240 },  { 240, 20 }, {}},
-    {{ 640, 480 },  { 320, 20 }, {}},
-    };
+    
 
     for (int i = 0; i < TERRAIN_NUM; ++i)
     {

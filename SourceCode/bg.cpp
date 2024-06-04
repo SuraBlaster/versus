@@ -51,17 +51,17 @@ void BG::drawGameClear()
 {
 }
 
-bool BG::hitCheck(object rc1, OBJ2D* rc2)
+bool BG::hitCheck(OBJ2D* rc1, object rc2)
 {
-    const float rc1Left = rc1.pos.x - rc1.hsize.x;
-    const float rc1Right = rc1.pos.x + rc1.hsize.x;
-    const float rc1Top = rc1.pos.y - rc1.hsize.y;
-    const float rc1Bottom = rc1.pos.y + rc1.hsize.y;
+    const float rc1Left = rc1->position.x - rc1->size.x;
+    const float rc1Right = rc1->position.x + rc1->size.x;
+    const float rc1Top = rc1->position.y - rc1->size.y / 2;
+    const float rc1Bottom = rc1->position.y + rc1->size.y / 2;
 
-    const float rc2Left = rc2->position.x - rc2->size.x;
-    const float rc2Right = rc2->position.x + rc2->size.x;
-    const float rc2Top = rc2->position.y - rc2->size.y;
-    const float rc2Bottom = rc2->position.y + rc2->size.y;
+    const float rc2Left = rc2.pos.x - rc2.hsize.x;
+    const float rc2Right = rc2.pos.x + rc2.hsize.x;
+    const float rc2Top = rc2.pos.y - rc2.hsize.y;
+    const float rc2Bottom = rc2.pos.y + rc2.hsize.y;
 
     if (rc1Right < rc2Left) return false;
     if (rc1Left > rc2Right) return false;
@@ -71,34 +71,34 @@ bool BG::hitCheck(object rc1, OBJ2D* rc2)
     return true;
 }
 
-float BG::checkDown(object rc1, OBJ2D* rc2)
+float BG::checkDown(OBJ2D* rc1,object rc2)
 {
-    const float rc1Bottom = rc1.pos.y + rc1.hsize.y;
-    const float rc2Top = rc2->position.y - rc2->size.y;
+    const float rc1Bottom = rc1->position.y + rc1->size.y / 2;
+    const float rc2Top = rc2.pos.y - rc2.hsize.y;
 
     return rc2Top - rc1Bottom - ADJUST;
 }
 
-float BG::checkUp(object rc1, OBJ2D* rc2)
+float BG::checkUp(OBJ2D* rc1,object rc2)
 {
-    const float rc1Top = rc1.pos.y - rc1.hsize.y;
-    const float rc2Bottom = rc2->position.y + rc2->size.y;
+    const float rc1Top = rc1->position.y - rc1->size.y / 2;
+    const float rc2Bottom = rc2.pos.y + rc2.hsize.y;
 
     return rc2Bottom - rc1Top + ADJUST;
 }
 
-float BG::checkRight(object rc1, OBJ2D* rc2)
+float BG::checkRight(OBJ2D* rc1,object rc2)
 {
-    const float rc1Right = rc1.pos.x + rc1.hsize.x;
-    const float rc2Left = rc2->position.x - rc2->size.x;
+    const float rc1Right = rc1->position.x + rc1->size.x;
+    const float rc2Left = rc2.pos.x - rc2.hsize.x;
 
     return rc2Left - rc1Right - ADJUST;
 }
 
-float BG::checkLeft(object rc1, OBJ2D* rc2)
+float BG::checkLeft(OBJ2D* rc1,object rc2)
 {
-    const float rc1Left = rc1.pos.x - rc1.hsize.x;
-    const float rc2Right = rc2->position.x + rc2->size.x;
+    const float rc1Left = rc1->position.x - rc1->size.x;
+    const float rc2Right = rc2.pos.x + rc2.hsize.x;
 
     return rc2Right - rc1Left + ADJUST;
 }
