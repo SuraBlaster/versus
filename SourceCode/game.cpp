@@ -61,7 +61,7 @@ void Game::update()
         return;
     }
 
-    if (TRG(0) & PAD_TRG1)
+    /*if (TRG(0) & PAD_TRG1)
     {
         if (BackGround > 0)
         {
@@ -77,7 +77,7 @@ void Game::update()
                 BackGround++;
             }
         }
-    }
+    }*/
 
     
     // デバッグ文字列表示
@@ -119,10 +119,6 @@ void Game::update()
 
         timer++;
 
-        if (TRG(0) & GetKeyState('R'))
-        {
-            
-        }
 
         // プレイヤーの更新
         playerManager()->update();
@@ -181,8 +177,6 @@ void Game::draw()
         window::getWidth(), window::getHeight()-UNDER_GROUND_POS_Y,0,0,ToRadian(0)
     ,1,0,0);*/
 
-    
-    
 
     for (int i = 0; i < TERRAIN_NUM; ++i)
     {

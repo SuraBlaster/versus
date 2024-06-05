@@ -56,8 +56,8 @@ bool BG::hitCheck(OBJ2D* rc1, object rc2)
 {
     const float rc1Left = rc1->position.x - rc1->size.x;
     const float rc1Right = rc1->position.x + rc1->size.x;
-    const float rc1Top = rc1->position.y - rc1->size.y / 2;
-    const float rc1Bottom = rc1->position.y + rc1->size.y / 2;
+    const float rc1Top = rc1->position.y - rc1->size.y;
+    const float rc1Bottom = rc1->position.y;
 
     const float rc2Left = rc2.pos.x - rc2.hsize.x;
     const float rc2Right = rc2.pos.x + rc2.hsize.x;
@@ -74,7 +74,7 @@ bool BG::hitCheck(OBJ2D* rc1, object rc2)
 
 float BG::checkDown(OBJ2D* rc1,object rc2)
 {
-    const float rc1Bottom = rc1->position.y + rc1->size.y / 2;
+    const float rc1Bottom = rc1->position.y;
     const float rc2Top = rc2.pos.y - rc2.hsize.y;
 
     return rc2Top - rc1Bottom - ADJUST;
@@ -82,7 +82,7 @@ float BG::checkDown(OBJ2D* rc1,object rc2)
 
 float BG::checkUp(OBJ2D* rc1,object rc2)
 {
-    const float rc1Top = rc1->position.y - rc1->size.y / 2;
+    const float rc1Top = rc1->position.y - rc1->size.y;
     const float rc2Bottom = rc2.pos.y + rc2.hsize.y;
 
     return rc2Bottom - rc1Top + ADJUST;
