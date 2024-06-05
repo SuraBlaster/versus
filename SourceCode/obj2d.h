@@ -1,5 +1,4 @@
-#ifndef INCLUDED_OBJ2D
-#define	INCLUDED_OBJ2D
+#pragma once
 //******************************************************************************
 //
 //
@@ -34,13 +33,6 @@ public:
     virtual void erase(OBJ2D* obj) = 0; // 上と同様
 };
 
-struct OBJ2d
-{
-    VECTOR2 pos;    // オブジェクトの位置（中心は中央）
-    VECTOR2 hsize;  // オブジェクトのサイズの半分
-
-    VECTOR2 speed;
-};
 
 //==============================================================================
 //==============================================================================
@@ -53,7 +45,7 @@ class OBJ2D
 {
 public:
     // メンバ変数
-    GameLib::SpriteData*    data;               // スプライトデータ
+    GameLib::SpriteData* data;               // スプライトデータ
     GameLib::Anime          anime;              // アニメーションクラス
 
     VECTOR2                 position;           // 位置
@@ -62,8 +54,8 @@ public:
     VECTOR4                 color;              // 描画色
     VECTOR2                 size;               // あたり用サイズ（縦横）
 
-    MoveAlg*                mvAlg;              // 移動アルゴリズム
-    EraseAlg*               eraseAlg;           // 消去アルゴリズム
+    MoveAlg* mvAlg;              // 移動アルゴリズム
+    EraseAlg* eraseAlg;           // 消去アルゴリズム
 
     float                   velocity;           // 速度
     VECTOR2                 speed;              // 瞬間の移動量ベクトル
@@ -81,7 +73,10 @@ public:
     bool                    judgeFlag;          // あたり判定の有無（true:有り / false:無し）
     BYTE                    pad[1];             // 1バイトの空き
 
-    
+
+
+
+
 public:
 
     OBJ2D();        // コンストラクタ
@@ -89,8 +84,12 @@ public:
     void move();    // 移動
     void draw();    // 描画
 
+
+
     bool animeUpdate(GameLib::AnimeData* animeData);    // アニメーションのアップデート
 };
+
+
 
 //==============================================================================
 
@@ -109,8 +108,24 @@ public:
 
     OBJ2D* add(MoveAlg* mvAlg, const VECTOR2& pos = VECTOR2(0, 0)); // objListに新たなOBJ2Dを追加する
     std::list<OBJ2D>* getList() { return &objList; }                // objListを取得する
+
 };
 
-//******************************************************************************
+struct object
+{
+    VECTOR2 pos;
+    VECTOR2 hsize;
 
-#endif// ! INCLUDED_OBJ2D
+    float speed;
+};
+
+static object terrain[TERRAIN_NUM] = {
+    {{ 640, 500 },  { 600, 20 }, {}},
+    {{ 1220, 340 }, { 20, 180 }, {}},
+    {{ 640, 40 },   { 240, 20 }, {}},
+    {{ 640, 280 },  { 320, 20 }, {}},
+    {{ 200, 900 },  { 600, 20 }, {}},
+    {{ 1220, 740 }, { 20, 180 }, {}},
+    {{ 600, 480 },  { 240, 20 }, {}},
+    {{ 640, 680 },  { 320, 20 }, {}},
+};

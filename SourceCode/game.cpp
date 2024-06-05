@@ -1,12 +1,3 @@
-//******************************************************************************
-//
-//
-//      ゲーム
-//
-//
-//******************************************************************************
-
-//------< インクルード >---------------------------------------------------------
 #include "all.h"
 
 //------< using >---------------------------------------------------------------
@@ -23,9 +14,12 @@ void Game::init()
 {
     Scene::init();	    // 基底クラスのinitを呼ぶ
 
-    playerManager_      = new PlayerManager;
-
+    playerManager_ = new PlayerManager;
+    obj2d_ = new OBJ2D;
     isPaused = false;   // ポーズフラグの初期化
+
+    BackGround = 960;
+
 }
 
 //--------------------------------
@@ -58,6 +52,25 @@ void Game::update()
         return;
     }
 
+    /*if (TRG(0) & PAD_TRG1)
+    {
+        if (BackGround > 0)
+        {
+            while (BackGround = 0)
+            {
+                BackGround--;
+            }
+        }
+        else
+        {
+            while (BackGround < 960)
+            {
+                BackGround++;
+            }
+        }
+    }*/
+
+
     // デバッグ文字列表示
     debug::setString("state:%d", state);
     debug::setString("timer:%d", timer);
@@ -82,7 +95,11 @@ void Game::update()
         playerManager()->init();
 
         // プレイヤー（自分で操作）を追加する
-        playerManager()->add(&player, VECTOR2(window::getWidth() / 2, window::getHeight() / 2));
+        playerManager()->add(&player[0], VECTOR2(window::getWidth() / 3, window::getHeight() / 3));
+        playerManager()->add(&player[1], VECTOR2(window::getWidth() / 3, 900));
+
+
+
 
         state++;    // 初期化処理の終了
 
@@ -92,6 +109,7 @@ void Game::update()
         //////// 通常時の処理 ////////
 
         timer++;
+
 
         // プレイヤーの更新
         playerManager()->update();
@@ -109,19 +127,20 @@ void Game::draw()
     GameLib::clear(VECTOR4(0, 0, 0, 1));
 
 #if 2
-//******************************************************************************
-// TODO:02 地面の描画
-//------------------------------------------------------------------------------
-/*
-課題）
-    地面を描画しなさい
+    //******************************************************************************
+    // TODO:02 地面の描画
+    //------------------------------------------------------------------------------
+    /*
+    課題）
+        地面を描画しなさい
 
-ヒント）
-    0, GROUND_POS_Yから、幅 window::getWidth()、高さ window::getHeight() - GROUND_POS_Yの
-    矩形を描画しなさい。色は背景色以外であれば、何色でも良い。
-*/
-//******************************************************************************
+    ヒント）
+        0, GROUND_POS_Yから、幅 window::getWidth()、高さ window::getHeight() - GROUND_POS_Yの
+        矩形を描画しなさい。色は背景色以外であれば、何色でも良い。
+    */
+    //******************************************************************************
 #endif
+    //TODO_02 地面の描画
     GameLib::texture::begin(TEXNO::BACK_WHITE);
     GameLib::texture::draw(TEXNO::BACK_WHITE,
         0, 0,//位置
@@ -135,7 +154,7 @@ void Game::draw()
 
     GameLib::texture::begin(TEXNO::BACK_BLACK);
     GameLib::texture::draw(TEXNO::BACK_BLACK,
-        960, 0,//位置
+        BackGround, 0,//位置
         1, 1,       //大きさ
         0, 0,       //切り抜き位置
         960, 1080, //切り抜きサイズ
@@ -145,14 +164,25 @@ void Game::draw()
     GameLib::texture::end(TEXNO::BACK_BLACK);
 
 
-    //TODO_02 地面の描画
-    primitive::rect(0, GROUND_POS_Y,
-        window::getWidth(), window::getHeight()-GROUND_POS_Y,0,0,ToRadian(0)
-    ,1,0,0);
+    /*primitive::rect(0, UNDER_GROUND_POS_Y,
+        window::getWidth(), window::getHeight()-UNDER_GROUND_POS_Y,0,0,ToRadian(0)
+    ,1,0,0);*/
+
+
+    for (int i = 0; i < TERRAIN_NUM; ++i)
+    {
+        primitive::rect(
+            terrain[i].pos,
+            terrain[i].hsize * 2,
+            terrain[i].hsize, 0,
+            { 1, 0, 1, 1 }
+        );
+    }
+
 
 
     // プレイヤーの描画
     playerManager()->draw();
-}
 
-//******************************************************************************
+
+}

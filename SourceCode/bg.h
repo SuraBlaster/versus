@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-
 class BG
 {
 public:
@@ -21,7 +20,7 @@ public:
 	void drawGameOver();
 	void drawGameClear();
 
-	bool hitCheck(OBJ2D*rc1, object rc2);
+	bool hitCheck(OBJ2D*, object);
 
 	float checkDown(OBJ2D*, object);
 	float checkUp(OBJ2D*, object);
