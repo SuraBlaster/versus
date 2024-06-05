@@ -1,5 +1,4 @@
-#ifndef INCLUDED_ALL
-#define INCLUDED_ALL
+ï»¿#pragma once
 
 //******************************************************************************
 //
@@ -9,7 +8,7 @@
 //
 //******************************************************************************
 
-//------< ƒCƒ“ƒNƒ‹[ƒh >---------------------------------------------------------
+//------< Æ’CÆ’â€œÆ’NÆ’â€¹Â[Æ’h >---------------------------------------------------------
 #include "../GameLib/game_lib.h"
 #include "../GameLib/input_manager.h"
 #include "../GameLib/obj2d_data.h"
@@ -20,13 +19,11 @@
 #include "common.h"
 #include "obj2d.h"
 #include "sprite_data.h"
+#include "bg.h"
+#include "Audio.h"
 
 #include "player.h"
 
 #include "scene.h"
 #include "game.h"
 #include "title.h"
-
-//******************************************************************************
-
-#endif // !INCLUDED_ALL
