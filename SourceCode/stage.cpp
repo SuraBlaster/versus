@@ -2,6 +2,7 @@
 #include "../GameLib/game_lib.h"
 #include "common.h"
 #include "stage1.h"
+#include "tutorial.h"
 using namespace GameLib;
 Stage Stage::instance_;
 
@@ -40,7 +41,13 @@ void Stage::update()
             switch (table)  //今持ってるtableのステージに行く
             {
             case 0:
+                changeScene(Tutorial::instance());
+                break;
+            case 1:
                 changeScene(Stage1::instance());
+                break;
+            case 2:
+
                 break;
             }
 

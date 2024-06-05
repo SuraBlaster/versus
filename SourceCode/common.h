@@ -13,7 +13,7 @@
 #include <DirectXMath.h>
 
 //------< ŠÖ” >----------------------------------------------------------------
-static constexpr int TABLE_MAX = 4;
+static constexpr int TABLE_MAX = 3;
 
 
 static float(*const ToRadian)(float) = DirectX::XMConvertToRadians;  // Šp“x‚ðƒ‰ƒWƒAƒ“‚É
