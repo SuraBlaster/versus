@@ -104,10 +104,28 @@ float BG::checkLeft(OBJ2D* rc1,object rc2)
     return rc2Right - rc1Left + ADJUST;
 }
 
+void BG::changePos(OBJ2D* obj, OBJ2D* obj2)
+{
+    int Box[2];
 
+    Box[0] = obj->position.y;
+    Box[1] = obj2->position.y;
 
+    while (obj->position.y == Box[1] && obj2->position.y == Box[0])
+    {
+        if (obj->position.y > 540.0f)
+        {
+            obj->position.y++;
+            obj2->position.y--;
+        }
+        else
+        {
+            obj->position.y--;
+            obj2->position.y++;
+        }
+    }
 
-
+}
 
 /****************************************************/
 // ‰æ‘œ‚ÌÝ’è //

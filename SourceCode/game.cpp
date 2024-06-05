@@ -107,7 +107,7 @@ void Game::update()
         playerManager()->add(&player[0], VECTOR2(window::getWidth() / 3, window::getHeight() / 3));
         playerManager()->add(&player[1], VECTOR2(window::getWidth() / 3, 900));
         
-
+        
         
 
         state++;    // 初期化処理の終了
@@ -119,7 +119,10 @@ void Game::update()
 
         timer++;
 
-        
+        if (TRG(0) & GetKeyState('R'))
+        {
+            
+        }
 
         // プレイヤーの更新
         playerManager()->update();
@@ -191,15 +194,7 @@ void Game::draw()
         );
     }
 
-    for (int i = 0; i < TERRAIN_NUM; ++i)
-    {
-        primitive::rect(
-            terrain2[i].pos,
-            terrain2[i].hsize * 2,
-            terrain2[i].hsize, 0,
-            { 1, 0, 1, 1 }
-        );
-    }
+ 
 
     // プレイヤーの描画
     playerManager()->draw();

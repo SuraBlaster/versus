@@ -8,6 +8,7 @@
 
 //------< インクルード >--------------------------------------------------------
 #include "all.h"
+using namespace GameLib::input;
 
 //------< using >---------------------------------------------------------------
 using namespace GameLib;
@@ -155,22 +156,7 @@ void Player::move(OBJ2D *obj)
             }
         }
 
-       for (int i = 0; i < TERRAIN_NUM; ++i)
-        {
-            if (Game::instance()->bgManager()->hitCheck(obj,terrain2[i]))
-            {
-                float dist;
-                if (obj->speed.y >= 0) {
-                    dist = Game::instance()->bgManager()->checkDown(obj, terrain2[i]);
-                    onGround = true;
-                }
-                else
-                    dist = Game::instance()->bgManager()->checkUp(obj,terrain2[i]);
-                obj->position.y += dist;
-                obj->speed.y = 0;
-                
-            }
-        }
+ 
 
        
         
@@ -290,18 +276,6 @@ void Player::move(OBJ2D *obj)
             }
         }
 
-        for (int i = 0; i < TERRAIN_NUM; ++i) {
-            if (Game::instance()->bgManager()->hitCheck(obj,terrain2[i])) {
-                float dist;
-                if (obj->speed.x > 0)
-                    dist = Game::instance()->bgManager()->checkRight(obj,terrain2[i]);
-                else
-                    dist = Game::instance()->bgManager()->checkLeft(obj,terrain2[i]);
-                obj->position.x += dist;
-                obj->speed.x = 0;
-                
-            }
-        }
 
 #if 4
 //******************************************************************************
@@ -409,6 +383,8 @@ void Player::move(OBJ2D *obj)
         obj->animeUpdate(animeData);
     }
 }
+
+
 
 //--------------------------------
 //  消去
