@@ -28,4 +28,5 @@ void Tutorial::update()
 
 void Tutorial::draw()
 {
+    GameLib::clear(VECTOR4(1, 1, 1, 1));
 }
