@@ -14,8 +14,6 @@ using namespace GameLib;
 
 //------< 変数 >----------------------------------------------------------------
 Game Game::instance_;
-Player* PlayerPosition;
-Player2* PlayerPosition2;
 
 //--------------------------------
 //  初期化処理
@@ -106,11 +104,8 @@ void Game::update()
 
         // プレイヤー（自分で操作）を追加する
         playerManager()->add(&player, VECTOR2(window::getWidth() / 3, window::getHeight() / 3));
-        playerManager()->add(&player2, VECTOR2(window::getWidth() / 3, 900));
+        playerManager()->add(&player2p, VECTOR2(window::getWidth() / 3, 900));
         //playerManager()->add(&player[1], VECTOR2(window::getWidth() / 3, 900));
-        
-        
-        
 
         state++;    // 初期化処理の終了
 
@@ -124,7 +119,8 @@ void Game::update()
         // 入れ替え処理
         if (TRG(0) & PAD_RKey)
         {
-            
+            playerManager()->add(&player, VECTOR2(player2_->playerPositionGet2X(), player2_->playerPositionGet2Y()));
+            playerManager()->add(&player2p, VECTOR2(player1_->playerPositionGet1X(), player1_->playerPositionGet1Y()));
         }
 
         // プレイヤーの更新

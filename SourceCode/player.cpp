@@ -12,6 +12,8 @@ using namespace GameLib::input;
 
 //------< using >---------------------------------------------------------------
 using namespace GameLib;
+Player*  playerPosition;
+Player2* playerPosition2 ;
 
 //******************************************************************************
 //
@@ -80,6 +82,9 @@ void Player::move(OBJ2D *obj)
     // 変数
     AnimeData* animeData = nullptr;
     bool onGround = false;          // 地上フラグ
+
+    playerPosition1X = obj->position.x;
+    playerPosition1Y = obj->position.y;
 
     switch (obj->state)
     {
@@ -229,14 +234,6 @@ void Player::move(OBJ2D *obj)
     }
 }
 
-void Player::positionSubstitution(OBJ2D* obj)
-{
-    obj->position.x = playerPosition1X;
-    obj->position.y = playerPosition1Y;
-}
-
-
-
 //--------------------------------
 //  消去
 //--------------------------------
@@ -258,6 +255,9 @@ void Player2::move(OBJ2D* obj)
     // 変数
     AnimeData* animeData = nullptr;
     bool onGround = false;          // 地上フラグ
+
+    playerPosition2X = obj->position.x ;
+    playerPosition2Y = obj->position.y ;
 
     switch (obj->state)
     {
@@ -403,10 +403,4 @@ void Player2::move(OBJ2D* obj)
         // animeDataに値が入っていれば、obj->animeUpdateメソッドを呼ぶ
         obj->animeUpdate(animeData);
     }
-}
-
-void Player2::positionSubstitution(OBJ2D* obj)
-{
-    obj->position.x = playerPosition2X;
-    obj->position.y = playerPosition2Y;
 }

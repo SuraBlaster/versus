@@ -21,12 +21,11 @@ class Player : public MoveAlg
 {
 public:
     void move(OBJ2D* obj);
-    void positionSubstitution(OBJ2D* obj);
-    float playerPositionGetX() { return playerPosition1X; }
-    float playerPositionGetY() { return playerPosition1Y; }
+    float playerPositionGet1X() { return playerPosition1X; }
+    float playerPositionGet1Y() { return playerPosition1Y; }
 private:
-    float playerPosition1X;
-    float playerPosition1Y;
+    float playerPosition1X = 0.0f;
+    float playerPosition1Y = 0.0f;
 };
 
 // 移動アルゴリズムの実体
@@ -37,16 +36,15 @@ class Player2 : public MoveAlg
 {
 public:
     void move(OBJ2D* obj);
-    void positionSubstitution(OBJ2D* obj);
-    float playerPositionGetX() { return playerPosition2X; }
-    float playerPositionGetY() { return playerPosition2Y; }
+    float playerPositionGet2X() { return playerPosition2X; }
+    float playerPositionGet2Y() { return playerPosition2Y; }
 private:
-    float playerPosition2X;
-    float playerPosition2Y;
+    float playerPosition2X = 0.0f;
+    float playerPosition2Y = 0.0f;
 };
 
 // 移動アルゴリズムの実体
-EXTERN Player2 player2;
+EXTERN Player2 player2p;
 
 //==============================================================================
 //
