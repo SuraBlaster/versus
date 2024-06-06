@@ -24,6 +24,8 @@ void Game::init()
 
     playerManager_      = new PlayerManager;
     obj2d_ = new OBJ2D;
+    player1_ = new Player; // player1_のインスタンスを作成
+    player2_ = new Player2; // player2_のインスタンスを作成
     isPaused = false;   // ポーズフラグの初期化
 
     BackGround = 960;
@@ -37,6 +39,8 @@ void Game::deinit()
 {
     // 各マネージャの解放
     safe_delete(playerManager_);
+    safe_delete(player1_); // player1_の解放
+    safe_delete(player2_); // player2_の解放
 
     // テクスチャの解放
     texture::releaseAll();
@@ -58,6 +62,46 @@ void Game::update()
     {
         changeScene(Title::instance());   // タイトルシーンに切り替える
         return;
+    }
+
+    // 入れ替え処理
+    if (TRG(0) & PAD_RKey)
+    {
+        //プレイヤーの数
+        int player_count = 0;
+        //プレイヤーの位置保存
+        VECTOR2 player1_position,player2_position;
+
+        OBJ2D player1, player2;
+
+
+        // プレイヤーマネージャーの全ての要素をループ
+        for (auto& it : *playerManager_->getList()) 
+        {
+            //カウントを取ってプレイヤーの種類を判別
+            player_count++;
+    
+            //位置を保存
+            if (player_count == 1)player1_position.y = it.position.y;
+            if (player_count == 2)player2_position.y = it.position.y;
+        }
+
+        //初期化
+        player_count = 0;
+        //
+      
+        // プレイヤーマネージャーの全ての要素をループ
+        for (auto& it : *playerManager_->getList()) 
+        {
+            //カウントを取ってプレイヤーの種類を判別
+            player_count++;
+
+            //保存した位置を変更
+            if (player_count == 1)it.position.y = player2_position.y;
+            if (player_count == 2)it.position.y = player1_position.y;
+        }
+
+
     }
 
     /*if (TRG(0) & PAD_TRG1)
@@ -115,13 +159,6 @@ void Game::update()
         //////// 通常時の処理 ////////
 
         timer++;
-        
-        // 入れ替え処理
-        if (TRG(0) & PAD_RKey)
-        {
-            playerManager()->add(&player, VECTOR2(player2_->playerPositionGet2X(), player2_->playerPositionGet2Y()));
-            playerManager()->add(&player2p, VECTOR2(player1_->playerPositionGet1X(), player1_->playerPositionGet1Y()));
-        }
 
         // プレイヤーの更新
         playerManager()->update();
