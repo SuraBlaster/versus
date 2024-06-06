@@ -1,4 +1,5 @@
 #pragma once
+#include "..\GameLib\DirectXTK-master\Inc\Keyboard.h"
 
 
 //******************************************************************************
@@ -20,11 +21,32 @@ class Player : public MoveAlg
 {
 public:
     void move(OBJ2D* obj);
+    void positionSubstitution(OBJ2D* obj);
+    float playerPositionGetX() { return playerPosition1X; }
+    float playerPositionGetY() { return playerPosition1Y; }
+private:
+    float playerPosition1X;
+    float playerPosition1Y;
 };
 
 // 移動アルゴリズムの実体
-EXTERN Player player[2];
+EXTERN Player player;
 
+
+class Player2 : public MoveAlg
+{
+public:
+    void move(OBJ2D* obj);
+    void positionSubstitution(OBJ2D* obj);
+    float playerPositionGetX() { return playerPosition2X; }
+    float playerPositionGetY() { return playerPosition2Y; }
+private:
+    float playerPosition2X;
+    float playerPosition2Y;
+};
+
+// 移動アルゴリズムの実体
+EXTERN Player2 player2;
 
 //==============================================================================
 //
