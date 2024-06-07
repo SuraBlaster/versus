@@ -86,7 +86,7 @@ void Game::update()
         //初期化
         player_count = 0;
         //
-        VECTOR2 toPlayer1, toPlayer2;
+        /*VECTOR2 toPlayer1, toPlayer2;
         toPlayer1 = player1_position - player2_position;
         toPlayer2 = player2_position - player1_position;
         float length1 = sqrtf(toPlayer1.x * toPlayer1.x + toPlayer1.y * toPlayer1.y);
@@ -94,7 +94,7 @@ void Game::update()
 
         VECTOR2 velocity1, velocity2;
         velocity1.y = toPlayer1.y / length1 * 1;
-        velocity2.y = toPlayer2.y / length2 * 1;
+        velocity2.y = toPlayer2.y / length2 * 1;*/
 
         
             // プレイヤーマネージャーの全ての要素をループ
@@ -104,7 +104,7 @@ void Game::update()
                 player_count++;
 
                 //保存した位置を変更
-                for (int i = 0; i < 300; i++)
+                /*for (int i = 0; i < 300; i++)
                 {
                     if (player_count == 1)it.position.y += velocity2.y;
                 }
@@ -113,7 +113,10 @@ void Game::update()
                 for (int i = 0; i < 300; i++)
                 {
                     if (player_count == 2)it.position.y += velocity1.y;
-                }
+                }*/
+
+                if (player_count == 1)it.position.y = player2_position.y;
+                if (player_count == 2)it.position.y = player1_position.y;
 
             }
         
