@@ -2,6 +2,7 @@
 #include "../GameLib/game_lib.h"
 #include "common.h"
 #include "stage1.h"
+#include "game.h"
 #include "tutorial.h"
 using namespace GameLib;
 Stage Stage::instance_;
@@ -38,21 +39,21 @@ void Stage::update()
 
         if (TRG(0) & PAD_START)             // PAD_TRG1が押されたら
         {
-            switch (table)  //今持ってるtableのステージに行く
-            {
-            case 0:
-                changeScene(Tutorial::instance());
-                break;
-            case 1:
-                changeScene(Stage1::instance());
-                break;
-            case 2:
+            //switch (table)  //今持ってるtableのステージに行く
+            //{
+            //case 0:
+            //    changeScene(Tutorial::instance());
+            //    break;
+            //case 1:
+            //    changeScene(Stage1::instance());
+            //    break;
+            //case 2:
 
-                break;
-            }
+            //    break;
+            //}
+            changeScene(Game::instance());  // ゲームシーンに切り替え
 
         }
-            //changeScene(Game::instance());  // ゲームシーンに切り替え
 
         break;
     }
