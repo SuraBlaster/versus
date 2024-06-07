@@ -2,6 +2,7 @@
 #include "../GameLib/game_lib.h"
 #include "common.h"
 #include "stage1.h"
+#include "stage2.h"
 #include "game.h"
 #include "tutorial.h"
 using namespace GameLib;
@@ -28,7 +29,7 @@ void Stage::update()
 
         timer++;                            // タイマーを足す
 
-        if (TRG(0) & PAD_RIGHT && table< TABLE_MAX)
+        if (TRG(0) & PAD_RIGHT && table< 2)
         {
             table++;
         }
@@ -39,20 +40,20 @@ void Stage::update()
 
         if (TRG(0) & PAD_START)             // PAD_TRG1が押されたら
         {
-            //switch (table)  //今持ってるtableのステージに行く
-            //{
-            //case 0:
-            //    changeScene(Tutorial::instance());
-            //    break;
-            //case 1:
-            //    changeScene(Stage1::instance());
-            //    break;
-            //case 2:
-
-            //    break;
-            //}
-            changeScene(Game::instance());  // ゲームシーンに切り替え
-
+            switch (table)  //今持ってるtableのステージに行く
+            {
+            case 0:
+                changeScene(Tutorial::instance());
+                
+                break;
+            case 1:
+                changeScene(Stage1::instance());
+                break;
+            case 2:
+                changeScene(Stage2::instance());
+                break;
+            }
+         
         }
 
         break;

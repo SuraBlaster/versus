@@ -1,14 +1,12 @@
-#include "stage1.h"
+#include "stage2.h"
 #include "../GameLib/game_lib.h"
 #include "../GameLib/input_manager.h"
 #include "sprite_data.h"
 #include "common.h"
 using namespace GameLib::input;
 using namespace GameLib;
-Stage1 Stage1::instance_Stage1;
-Sprite* kabe;
-Sprite* hari;
-void Stage1::init()
+Stage2 Stage2::instance_Stage2;
+void Stage2::init()
 {
     Scene::init();	    // 基底クラスのinitを呼ぶ
     rectposy = 550;
@@ -18,11 +16,9 @@ void Stage1::init()
     player1_ = new Player; // player1_のインスタンスを作成
     player2_ = new Player2; // player2_のインスタンスを作成
     isPaused = false;   // ポーズフラグの初期化
-    kabe = sprite_load(L"./Data/Images/kabe.png");
-    hari = sprite_load(L"./Data/Images/hari.png");
 }
 
-void Stage1::deinit()
+void Stage2::deinit()
 {
     safe_delete(playerManager_);
     safe_delete(player1_); // player1_の解放
@@ -35,7 +31,7 @@ void Stage1::deinit()
     music::clear();
 }
 
-void Stage1::update()
+void Stage2::update()
 {
     if (TRG(0) & PAD_RKey)
     {
@@ -75,7 +71,7 @@ void Stage1::update()
             if (player_count == 2)it.position.y = player1_position.y;
         }
 
-       
+
 
 
 
@@ -99,22 +95,14 @@ void Stage1::update()
         playerManager()->add(&player2p, VECTOR2(window::getWidth() / 8, 1000));
         //playerManager()->add(&player[1], VECTOR2(window::getWidth() / 3, 900));
 
-       
+
         state++;    // 初期化処理の終了
 
         /*fallthrough*/     // case 1:の処理も同時に行う必要があるため、わざとbreak;を記述していない
 
     case 1:
         //////// 通常時の処理 ////////
-        if (terrain[9].pos.y == 1100)
-        {
-            num = 1;
-        }
-        else if (terrain[9].pos.y == 1280)
-        {
-            num = -1;
-        }
-        terrain[9].pos.y += 3 * num;
+       
         playerManager()->update(1);
 
         timer++;
@@ -122,11 +110,10 @@ void Stage1::update()
     }
 }
 
-void Stage1::draw()
+void Stage2::draw()
 {
     GameLib::clear(VECTOR4(1, 1, 1, 1));
-
-    for (int i = 4; i < 12; ++i)
+    for (int i = 12; i < 18; ++i)
     {
         primitive::rect(
             terrain[i].pos,
@@ -135,14 +122,6 @@ void Stage1::draw()
             { 1, 0, 1, 1 }
         );
     }
-
-    for (int i = 500; i < 1360; i += 60)
-    {
-        sprite_render(hari,i, 470, 0.5f, 0.5f);
-        sprite_render(hari,i, 1000, 0.5f, 0.5f);
-    }
-
-    sprite_render(kabe, 0, 680,0.5f,0.5f);
-    // プレイヤーの描画
     playerManager()->draw();
 }
+

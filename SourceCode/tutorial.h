@@ -1,6 +1,7 @@
 #pragma once
 #include "scene.h"
 #include"player.h"
+#include "bg.h"
 class Tutorial :public Scene
 {
 public:
@@ -19,8 +20,13 @@ public:
 private:
     bool                isPaused;
 
+    int BackGround;
+    int rectposy;
     // ƒƒ“ƒo•Ï”‚ÍŒã‚ë‚É_‚ğ‚Â‚¯‚é
+    Player* player1_;
+    Player2* player2_;
     PlayerManager* playerManager_;
-
+    OBJ2D* obj2d_;
+    BG* bgManager_;
     static Tutorial instance_tutorial;
 };

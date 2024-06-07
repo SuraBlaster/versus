@@ -152,7 +152,7 @@ void Game::update()
         timer++;
 
         // プレイヤーの更新
-        playerManager()->update();
+        playerManager()->update(1);
 
         break;
     }
@@ -209,7 +209,7 @@ void Game::draw()
     ,1,0,0);*/
 
 
-    for (int i = 0; i < TERRAIN_NUM; ++i)
+   /* for (int i = 0; i < TERRAIN_NUM; ++i)
     {
         primitive::rect(
             terrain[i].pos,
@@ -217,7 +217,7 @@ void Game::draw()
             terrain[i].hsize, 0,
             { 1, 0, 1, 1 }
         );
-    }
+    }*/
 
 
 

@@ -2,10 +2,10 @@
 #include "scene.h"
 #include"player.h"
 #include"bg.h"
-class Stage1 :public Scene
+class Stage2 :public Scene
 {
 public:
-    static Stage1* instance() { return &instance_Stage1; }
+    static Stage2* instance() { return &instance_Stage2; }
 
     void init();
     void deinit();
@@ -29,5 +29,5 @@ private:
     PlayerManager* playerManager_;
     OBJ2D* obj2d_;
     BG* bgManager_;
-    static Stage1 instance_Stage1;
+    static Stage2 instance_Stage2;
 };
