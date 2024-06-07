@@ -82,46 +82,88 @@ void Game::update()
             player_count++;
 
             //位置を保存
-            if (player_count == 1)player1_position.y = it.position.y;
-            if (player_count == 2)player2_position.y = it.position.y;
+            if (player_count == 1)player1_position = it.position;
+            if (player_count == 2)player2_position = it.position;
         }
 
         //初期化
         player_count = 0;
         //
-        /*VECTOR2 toPlayer1, toPlayer2;
+        VECTOR2 velocity = { 8.0f,0 };
+        VECTOR2 velocity2 = { -8.0f,0 };
+        VECTOR2 toPlayer1, toPlayer2;
+        float rotation = 0.0f;
+
         toPlayer1 = player1_position - player2_position;
         toPlayer2 = player2_position - player1_position;
-        float length1 = sqrtf(toPlayer1.x * toPlayer1.x + toPlayer1.y * toPlayer1.y);
-        float length2 = sqrtf(toPlayer2.x * toPlayer2.x + toPlayer2.y * toPlayer2.y);
+        /*float length1 = sqrtf(toPlayer1.x * toPlayer1.x + toPlayer1.y * toPlayer1.y);
+        float length2 = sqrtf(toPlayer2.x * toPlayer2.x + toPlayer2.y * toPlayer2.y);*/
+        /*velocity1.y = toPlayer1.y / length1 * 0.001f;
+        velocity2.y = toPlayer2.y / length2 * 0.001f;*/
 
-        VECTOR2 velocity1, velocity2;
-        velocity1.y = toPlayer1.y / length1 * 1;
-        velocity2.y = toPlayer2.y / length2 * 1;*/
+        float cross1 = velocity.x * toPlayer1.y - velocity.y * toPlayer1.x;
+        float cross2 = velocity.x * toPlayer2.y - velocity.y * toPlayer2.x;
+        
+        if (cross1 > 0 || cross2 > 0)
+        {
+            rotation += 0.025f;
+        }
+        else if (cross1 < 0 || cross2 < 0)
+        {
+            rotation -= 0.025f;
+        }
+
+        velocity = -VECTOR2(cosf(rotation), sinf(rotation)) * 8.0f;
 
         
             // プレイヤーマネージャーの全ての要素をループ
-            for (auto& it : *playerManager_->getList())
+        for (auto& it : *playerManager_->getList())
+        {
+
+            //カウントを取ってプレイヤーの種類を判別
+            player_count++;
+
+            //保存した位置を変更
+
+            if (player_count == 1)
             {
-                //カウントを取ってプレイヤーの種類を判別
-                player_count++;
-
-                //保存した位置を変更
-                /*for (int i = 0; i < 300; i++)
+                if (player1_position.y < 540)
                 {
-                    if (player_count == 1)it.position.y += velocity2.y;
+                    while (player2_position.y >= it.position.y)
+                    {
+                        it.position.y -= velocity.y;
+                    }
                 }
-                
-
-                for (int i = 0; i < 300; i++)
+                else
                 {
-                    if (player_count == 2)it.position.y += velocity1.y;
-                }*/
-
-                if (player_count == 1)it.position.y = player2_position.y;
-                if (player_count == 2)it.position.y = player1_position.y;
-
+                    while (player2_position.y <= it.position.y)
+                    {
+                        it.position.y += velocity.y;
+                    }
+                }
             }
+
+            if (player_count == 2)
+            {
+                if (player2_position.y > 540)
+                {
+                    while (player1_position.y <= it.position.y)
+                    {
+                        it.position.y += velocity.y;
+                    }
+                }
+                else
+                {
+                    while (player1_position.y >= it.position.y)
+                    {
+                        it.position.y -= velocity.y;
+                    }
+                }
+            }
+            /*if (player_count == 1)it.position.y = player2_position.y;
+            if (player_count == 2)it.position.y = player1_position.y;*/
+
+        }
         
       
     }

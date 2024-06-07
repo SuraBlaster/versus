@@ -117,6 +117,18 @@
     <ClInclude Include="SourceCode\Audio.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\stage.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\stage1.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\stage2.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\tutorial.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameLib\primitive.hlsli">
@@ -232,6 +244,18 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\Audio.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\stage.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\stage1.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\stage2.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\tutorial.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

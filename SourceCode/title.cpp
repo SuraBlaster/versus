@@ -8,13 +8,13 @@
 
 //------< インクルード >---------------------------------------------------------
 #include "all.h"
-
+#include "stage.h"
 //------< using >---------------------------------------------------------------
 using namespace GameLib;
 
 //------< 変数 >----------------------------------------------------------------
 Title Title::instance_;
-
+Sprite* sprtitle;
 //--------------------------------
 //  更新処理
 //--------------------------------
@@ -42,7 +42,7 @@ void Title::update()
         timer++;                            // タイマーを足す
 
         if (TRG(0) & PAD_START)             // PAD_TRG1が押されたら
-            changeScene(Game::instance());  // ゲームシーンに切り替え
+            changeScene(Stage::instance());  // ゲームシーンに切り替え
 
         break;
     }
@@ -55,7 +55,7 @@ void Title::draw()
 {
     // 画面クリア
     GameLib::clear(VECTOR4(0.2f, 0.3f, 1.0f, 1));
-
+    sprite_render(sprtitle, 0, 0);
     // タイトル表示
     font::textOut(4, "ECC COMP", { 60, 60 }, { 4, 4 }, { 1, 1, 0, 1 });
     font::textOut(4, "Game Programming II", { 60, 160 }, { 2, 2 }, { 0, 1, 1, 1 });

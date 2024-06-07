@@ -19,6 +19,7 @@ protected:
     int state;          // 状態
     int timer;          // タイマー
     Scene* nextScene;   // 次のシーン
+    int table;
 
 public:
     Scene* execute();   // 実行処理

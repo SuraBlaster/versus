@@ -69,7 +69,7 @@ namespace
 //--------------------------------
 //  直接操作
 //--------------------------------
-void Player::move(OBJ2D* obj)
+void Player::move(OBJ2D* obj,int t)
 {
     using namespace input;  // 関数内で入力処理を行うときに記述する
 
@@ -98,6 +98,17 @@ void Player::move(OBJ2D* obj)
         obj->size = VECTOR2(96 / 3, 128);
 
         obj->state++;
+        switch (t)
+        {
+        case 0:
+            min1 = 0;
+            max1 = 4;
+            break;
+        case 1:
+            min1 = 4;
+            max1 = 12;
+            break;
+        }
 
         break;
 
@@ -115,8 +126,22 @@ void Player::move(OBJ2D* obj)
         obj->speed.y = (std::max)(obj->speed.y, -SPEED_MAX_Y);
         obj->position.y += obj->speed.y;
 
+        
 
-        for (int i = 0; i < TERRAIN_NUM; ++i)
+        if (t == 1)
+        {
+            if (terrain[9].pos.y == 1100)
+            {
+                num1 = 1;
+            }
+            else if (terrain[9].pos.y == 1280)
+            {
+                num1 = -1;
+            }
+            terrain[9].pos.y = terrain.pos.y + (3 * num1);
+        }
+
+        for (int i = 0; i < max1; ++i)
         {
             if (Game::instance()->bgManager()->hitCheck(obj, terrain[i]))
             {
@@ -132,6 +157,8 @@ void Player::move(OBJ2D* obj)
 
             }
         }
+        
+        
 
         //TODO_03 左右入力の取り出し
         switch (STATE(0) & (PAD_LEFT | PAD_RIGHT))
@@ -171,7 +198,8 @@ void Player::move(OBJ2D* obj)
         //TODO_03 X方向移動
         obj->position.x += obj->speed.x;
 
-        for (int i = 0; i < TERRAIN_NUM; ++i) {
+        
+        for (int i = 0; i < max1; ++i) {
             if (Game::instance()->bgManager()->hitCheck(obj, terrain[i])) {
                 float dist;
                 if (obj->speed.x > 0)
@@ -183,6 +211,8 @@ void Player::move(OBJ2D* obj)
 
             }
         }
+        
+        
 
         //TODO_04 ジャンプチェック
         if (onGround == true && TRG(0) & PAD_TRG1)
@@ -242,7 +272,7 @@ void ErasePlayer::erase(OBJ2D* obj)
     obj->clear();           // OBJ2Dを消去する
 }
 
-void Player2::move(OBJ2D* obj)
+void Player2::move(OBJ2D* obj,int t)
 {
     using namespace input;  // 関数内で入力処理を行うときに記述する
 
@@ -270,6 +300,18 @@ void Player2::move(OBJ2D* obj)
         // サイズ設定（足元が中心であるため、幅はあたりとして使用する半分・縦はそのままが扱いやすい）
         obj->size = VECTOR2(96 / 3, 128);
 
+        switch (t)
+        {
+        case 0:
+            min1 = 0;
+            max1 = 4;
+            break;
+        case 1:
+            min1 = 4;
+            max1 = 12;
+            break;
+        }
+
         obj->state++;
 
         break;
@@ -288,8 +330,8 @@ void Player2::move(OBJ2D* obj)
         obj->speed.y = (std::max)(obj->speed.y, -SPEED_MAX_Y);
         obj->position.y += obj->speed.y;
 
-
-        for (int i = 0; i < TERRAIN_NUM; ++i)
+        
+        for (int i = min2; i < max2; ++i)
         {
             if (Game::instance()->bgManager()->hitCheck(obj, terrain[i]))
             {
@@ -305,6 +347,8 @@ void Player2::move(OBJ2D* obj)
 
             }
         }
+        
+        
 
         //TODO_03 左右入力の取り出し
         switch (STATE(0) & (PAD_LEFT | PAD_RIGHT))
@@ -342,7 +386,8 @@ void Player2::move(OBJ2D* obj)
         //TODO_03 X方向移動
         obj->position.x += obj->speed.x;
 
-        for (int i = 0; i < TERRAIN_NUM; ++i) {
+        
+        for (int i = min2; i < max2; ++i) {
             if (Game::instance()->bgManager()->hitCheck(obj, terrain[i])) {
                 float dist;
                 if (obj->speed.x > 0)
@@ -353,7 +398,9 @@ void Player2::move(OBJ2D* obj)
                 obj->speed.x = 0;
 
             }
-        }
+        };
+        
+        
 
         //TODO_04 ジャンプチェック
         if (onGround == true && TRG(0) & PAD_TRG1)

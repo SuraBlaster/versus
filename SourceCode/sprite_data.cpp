@@ -49,8 +49,6 @@ SpriteData sprPlayer_Down2  = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 2, 128 * 2, 96, 
 SpriteData sprPlayer_Left0  = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 0, 128 * 3, 96, 128);
 SpriteData sprPlayer_Left1  = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 1, 128 * 3, 96, 128);
 SpriteData sprPlayer_Left2  = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 2, 128 * 3, 96, 128);
-
-SpriteData sprPlayer2_Up0 = SPRITE_BOTTOM(TEXNO::PLAYER2, 96 * 0, 128 * 0, 96, 128);
 //------------------------------------------------------------------------------
 #undef SPRITE_CENTER
 #undef SPRITE_BOTTOM
