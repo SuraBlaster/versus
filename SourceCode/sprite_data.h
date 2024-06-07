@@ -14,6 +14,7 @@ enum TEXNO
 {
     // ÉQÅ[ÉÄ
     PLAYER,
+    PLAYER2,
     BACK_WHITE,
     BACK_BLACK,
 };
@@ -41,6 +42,6 @@ extern GameLib::SpriteData sprPlayer_Left0;
 extern GameLib::SpriteData sprPlayer_Left1;
 extern GameLib::SpriteData sprPlayer_Left2;
 
-
+extern GameLib::SpriteData sprPlayer2_Up0;
 //******************************************************************************
 

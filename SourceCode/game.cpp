@@ -61,23 +61,64 @@ void Game::update()
         return;
     }
 
-    /*if (TRG(0) & PAD_TRG1)
+    // 入れ替え処理
+    if (TRG(0) & PAD_RKey)
     {
-        if (BackGround > 0)
+        //プレイヤーの数
+        int player_count = 0;
+        //プレイヤーの位置保存
+        VECTOR2 player1_position, player2_position;
+
+        OBJ2D player1, player2;
+
+
+        // プレイヤーマネージャーの全ての要素をループ
+        for (auto& it : *playerManager_->getList())
         {
-            while (BackGround = 0)
-            {
-                BackGround--;
-            }
+            //カウントを取ってプレイヤーの種類を判別
+            player_count++;
+
+            //位置を保存
+            if (player_count == 1)player1_position.y = it.position.y;
+            if (player_count == 2)player2_position.y = it.position.y;
         }
-        else
-        {
-            while (BackGround < 960)
+
+        //初期化
+        player_count = 0;
+        //
+        VECTOR2 toPlayer1, toPlayer2;
+        toPlayer1 = player1_position - player2_position;
+        toPlayer2 = player2_position - player1_position;
+        float length1 = sqrtf(toPlayer1.x * toPlayer1.x + toPlayer1.y * toPlayer1.y);
+        float length2 = sqrtf(toPlayer2.x * toPlayer2.x + toPlayer2.y * toPlayer2.y);
+
+        VECTOR2 velocity1, velocity2;
+        velocity1.y = toPlayer1.y / length1 * 1;
+        velocity2.y = toPlayer2.y / length2 * 1;
+
+        
+            // プレイヤーマネージャーの全ての要素をループ
+            for (auto& it : *playerManager_->getList())
             {
-                BackGround++;
+                //カウントを取ってプレイヤーの種類を判別
+                player_count++;
+
+                //保存した位置を変更
+                for (int i = 0; i < 300; i++)
+                {
+                    if (player_count == 1)it.position.y += velocity2.y;
+                }
+                
+
+                for (int i = 0; i < 300; i++)
+                {
+                    if (player_count == 2)it.position.y += velocity1.y;
+                }
+
             }
-        }
-    }*/
+        
+      
+    }
 
     
     // デバッグ文字列表示
@@ -104,8 +145,8 @@ void Game::update()
         playerManager()->init();
 
         // プレイヤー（自分で操作）を追加する
-        playerManager()->add(&player[0], VECTOR2(window::getWidth() / 3, window::getHeight() / 3));
-        playerManager()->add(&player[1], VECTOR2(window::getWidth() / 3, 900));
+        playerManager()->add(&player, VECTOR2(window::getWidth() / 3, window::getHeight() / 3));
+        playerManager()->add(&player2p, VECTOR2(window::getWidth() / 3, 900));
         
         
         
@@ -119,6 +160,7 @@ void Game::update()
 
         timer++;
 
+        
 
         // プレイヤーの更新
         playerManager()->update();
