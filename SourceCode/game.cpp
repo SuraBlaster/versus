@@ -6,7 +6,6 @@ using namespace GameLib;
 //------< 変数 >----------------------------------------------------------------
 Game Game::instance_;
 
-
 //--------------------------------
 //  初期化処理
 //--------------------------------
@@ -16,6 +15,8 @@ void Game::init()
 
     playerManager_ = new PlayerManager;
     obj2d_ = new OBJ2D;
+    player1_ = new Player; // player1_のインスタンスを作成
+    player2_ = new Player2; // player2_のインスタンスを作成
     isPaused = false;   // ポーズフラグの初期化
 
     BackGround = 960;
@@ -29,6 +30,8 @@ void Game::deinit()
 {
     // 各マネージャの解放
     safe_delete(playerManager_);
+    safe_delete(player1_); // player1_の解放
+    safe_delete(player2_); // player2_の解放
 
     // テクスチャの解放
     texture::releaseAll();
@@ -50,6 +53,46 @@ void Game::update()
     {
         changeScene(Title::instance());   // タイトルシーンに切り替える
         return;
+    }
+
+    // 入れ替え処理
+    if (TRG(0) & PAD_RKey)
+    {
+        //プレイヤーの数
+        int player_count = 0;
+        //プレイヤーの位置保存
+        VECTOR2 player1_position, player2_position;
+
+        OBJ2D player1, player2;
+
+
+        // プレイヤーマネージャーの全ての要素をループ
+        for (auto& it : *playerManager_->getList())
+        {
+            //カウントを取ってプレイヤーの種類を判別
+            player_count++;
+
+            //位置を保存
+            if (player_count == 1)player1_position.y = it.position.y;
+            if (player_count == 2)player2_position.y = it.position.y;
+        }
+
+        //初期化
+        player_count = 0;
+        //
+
+        // プレイヤーマネージャーの全ての要素をループ
+        for (auto& it : *playerManager_->getList())
+        {
+            //カウントを取ってプレイヤーの種類を判別
+            player_count++;
+
+            //保存した位置を変更
+            if (player_count == 1)it.position.y = player2_position.y;
+            if (player_count == 2)it.position.y = player1_position.y;
+        }
+
+
     }
 
     /*if (TRG(0) & PAD_TRG1)
@@ -95,11 +138,9 @@ void Game::update()
         playerManager()->init();
 
         // プレイヤー（自分で操作）を追加する
-        playerManager()->add(&player[0], VECTOR2(window::getWidth() / 3, window::getHeight() / 3));
-        playerManager()->add(&player[1], VECTOR2(window::getWidth() / 3, 900));
-
-
-
+        playerManager()->add(&player, VECTOR2(window::getWidth() / 3, window::getHeight() / 3));
+        playerManager()->add(&player2p, VECTOR2(window::getWidth() / 3, 900));
+        //playerManager()->add(&player[1], VECTOR2(window::getWidth() / 3, 900));
 
         state++;    // 初期化処理の終了
 
@@ -109,7 +150,6 @@ void Game::update()
         //////// 通常時の処理 ////////
 
         timer++;
-
 
         // プレイヤーの更新
         playerManager()->update();

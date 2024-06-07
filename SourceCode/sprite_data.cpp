@@ -16,10 +16,11 @@ using namespace GameLib;
 
 // 2D画像ロードデータ
 LoadTexture loadTexture[] = {
-   { TEXNO::PLAYER,     L"./Data/Images/player.png",    1U },// プレイヤー
-   { TEXNO::BACK_WHITE, L"./Data/Images/White.png",     1U },//白い背景
-   { TEXNO::BACK_BLACK, L"./Data/Images/Black.png",      1U },//黒い背景
-   { -1, nullptr }	// 終了フラグ
+    { TEXNO::PLAYER,     L"./Data/Images/player.png",    1U },// プレイヤー
+    { TEXNO::PLAYER2,     L"./Data/Images/1UP.png",    1U },// プレイヤー
+    { TEXNO::BACK_WHITE, L"./Data/Images/White.png",     1U },//白い背景
+    { TEXNO::BACK_BLACK, L"./Data/Images/Black.png",      1U },//黒い背景
+    { -1, nullptr }	// 終了フラグ
 };
 
 //------< マクロ >--------------------------------------------------------------
@@ -28,9 +29,11 @@ LoadTexture loadTexture[] = {
 
 //------< プレイヤー >----------------------------------------------------------
 //上歩き
-SpriteData sprPlayer_Up0    = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 0, 128 * 0, 96, 128);
-SpriteData sprPlayer_Up1    = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 1, 128 * 0, 96, 128);
-SpriteData sprPlayer_Up2    = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 2, 128 * 0, 96, 128);
+SpriteData sprPlayer_Up0 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 0, 128 * 0, 96, 128);
+SpriteData sprPlayer_Up1 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 1, 128 * 0, 96, 128);
+SpriteData sprPlayer_Up2 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 2, 128 * 0, 96, 128);
+
+SpriteData sprPlayer2_Up0 = SPRITE_BOTTOM(TEXNO::PLAYER2, 96 * 0, 128 * 0, 96, 128);
 
 //右歩き
 SpriteData sprPlayer_Right0 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 0, 128 * 1, 96, 128);
@@ -38,14 +41,14 @@ SpriteData sprPlayer_Right1 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 1, 128 * 1, 96, 
 SpriteData sprPlayer_Right2 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 2, 128 * 1, 96, 128);
 
 //下歩き
-SpriteData sprPlayer_Down0  = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 0, 128 * 2, 96, 128);
-SpriteData sprPlayer_Down1  = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 1, 128 * 2, 96, 128);
-SpriteData sprPlayer_Down2  = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 2, 128 * 2, 96, 128);
+SpriteData sprPlayer_Down0 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 0, 128 * 2, 96, 128);
+SpriteData sprPlayer_Down1 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 1, 128 * 2, 96, 128);
+SpriteData sprPlayer_Down2 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 2, 128 * 2, 96, 128);
 
 //左歩き
-SpriteData sprPlayer_Left0  = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 0, 128 * 3, 96, 128);
-SpriteData sprPlayer_Left1  = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 1, 128 * 3, 96, 128);
-SpriteData sprPlayer_Left2  = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 2, 128 * 3, 96, 128);
+SpriteData sprPlayer_Left0 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 0, 128 * 3, 96, 128);
+SpriteData sprPlayer_Left1 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 1, 128 * 3, 96, 128);
+SpriteData sprPlayer_Left2 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 2, 128 * 3, 96, 128);
 
 //------------------------------------------------------------------------------
 #undef SPRITE_CENTER

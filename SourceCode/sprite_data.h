@@ -1,5 +1,4 @@
-#ifndef INCLUDED_SPRITE_DATA
-#define	INCLUDED_SPRITE_DATA
+#pragma once
 //******************************************************************************
 //
 //
@@ -15,6 +14,7 @@ enum TEXNO
 {
     // ÉQÅ[ÉÄ
     PLAYER,
+    PLAYER2,
     BACK_WHITE,
     BACK_BLACK,
 };
@@ -26,6 +26,8 @@ extern GameLib::LoadTexture loadTexture[];
 extern GameLib::SpriteData sprPlayer_Up0;
 extern GameLib::SpriteData sprPlayer_Up1;
 extern GameLib::SpriteData sprPlayer_Up2;
+
+extern GameLib::SpriteData sprPlayer2_Up0;
 
 //âEï‡Ç´
 extern GameLib::SpriteData sprPlayer_Right0;
@@ -41,6 +43,3 @@ extern GameLib::SpriteData sprPlayer_Down2;
 extern GameLib::SpriteData sprPlayer_Left0;
 extern GameLib::SpriteData sprPlayer_Left1;
 extern GameLib::SpriteData sprPlayer_Left2;
-
-//******************************************************************************
-#endif // !INCLUDED_SPRITE_DATA

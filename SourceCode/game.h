@@ -1,3 +1,4 @@
+
 #pragma once
 
 //******************************************************************************
@@ -7,7 +8,7 @@
 //
 //
 //******************************************************************************
-#include"bg.h"
+#include "bg.h"
 //==============================================================================
 //
 //      Gameクラス
@@ -32,6 +33,8 @@ public:
 
     // ゲッターは後ろに_をつけない
     PlayerManager* playerManager() { return playerManager_; }
+    Player* player1() { return player1_; }
+    Player2* player2() { return player2_; }
     OBJ2D* obj2D() { return obj2d_; }
     BG* bgManager() { return bgManager_; }
 
@@ -41,6 +44,8 @@ private:
 
     int BackGround;
     // メンバ変数は後ろに_をつける
+    Player* player1_;
+    Player2* player2_;
     PlayerManager* playerManager_;
     OBJ2D* obj2d_;
     BG* bgManager_;
