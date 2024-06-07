@@ -64,6 +64,7 @@ namespace GameLib
         { PAD_R1        , GamePad::RSHOULDER },     // Rボタン
         { PAD_L3        , GamePad::LSTICK },        // Lスティック
         { PAD_R3        , GamePad::RSTICK },        // Rスティック
+         { PAD_RKey      , Keyboard::R },
 
         { PAD_SELECT    , GamePad::BACK },          // バック（セレクト）ボタン
 

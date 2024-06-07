@@ -38,7 +38,7 @@ namespace GameLib
         const int PAD_R2 = (1 << 13);
         const int PAD_L3 = (1 << 14);
         const int PAD_R3 = (1 << 15);
-
+        const int PAD_RKey = (1 << 16);
         // ƒpƒbƒh‚ÌÅ‘å”
         const int	GAMEPAD_NUM = 4;
 
