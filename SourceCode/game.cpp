@@ -211,7 +211,7 @@ void Game::update()
         
 
         // プレイヤーの更新
-        playerManager()->update();
+        playerManager()->update(1);
 
         break;
     }

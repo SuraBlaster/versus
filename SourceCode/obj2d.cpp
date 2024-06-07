@@ -68,9 +68,9 @@ void OBJ2D::clear()
 //--------------------------------
 //  移動
 //--------------------------------
-void OBJ2D::move()
+void OBJ2D::move(int t)
 {
-    if (mvAlg) mvAlg->move(this);                   // 移動アルゴリズムが存在すれば、moveメソッドを呼ぶ
+    if (mvAlg) mvAlg->move(this,t);                   // 移動アルゴリズムが存在すれば、moveメソッドを呼ぶ
     if (eraseAlg) eraseAlg->erase(this);            // 消去アルゴリズムが存在すれば、eraseメソッドを呼ぶ
 }
 
@@ -155,12 +155,12 @@ OBJ2D* OBJ2DManager::add(MoveAlg* mvAlg, const VECTOR2& pos)
 //--------------------------------
 //  更新
 //--------------------------------
-void OBJ2DManager::update()
+void OBJ2DManager::update(int t)
 {
     // 移動
     for (auto& it : objList)            // objListの全ての要素をループし、itという名前で各要素にアクセス
     {
-        it.move();                      // itのmoveメソッドを呼ぶ
+        it.move(t);                      // itのmoveメソッドを呼ぶ
     }
 
     // 空ノードの削除（今は気にしなくて良い）

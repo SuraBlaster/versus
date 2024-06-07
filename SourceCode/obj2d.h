@@ -23,7 +23,7 @@ class OBJ2D;
 class MoveAlg
 {
 public:
-    virtual void move(OBJ2D* obj) = 0;  // 純粋仮想関数を持つので、MoveAlg型のオブジェクトは定義できない（派生させて使う）
+    virtual void move(OBJ2D* obj,int t) = 0;  // 純粋仮想関数を持つので、MoveAlg型のオブジェクトは定義できない（派生させて使う）
 };
 
 // 消去アルゴリズムクラス（抽象クラス）
@@ -81,7 +81,7 @@ public:
 
     OBJ2D();        // コンストラクタ
     void clear();   // メンバ変数のクリア
-    void move();    // 移動
+    void move(int t);    // 移動
     void draw();    // 描画
 
     
@@ -103,7 +103,7 @@ public:
     ~OBJ2DManager();
 
     void init();    // 初期化
-    void update();  // 更新
+    void update(int t);  // 更新
     void draw();    // 描画
 
     OBJ2D* add(MoveAlg* mvAlg, const VECTOR2& pos = VECTOR2(0, 0)); // objListに新たなOBJ2Dを追加する

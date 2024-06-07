@@ -27,6 +27,7 @@ public:
     float playerPositionGet1Y() { return playerPosition1Y; }
     void playerPositionSet1X(float position_x) { this->playerPosition1X = position_x; }
     void playerPositionSet1Y(float position_y) { this->playerPosition1Y = position_y; }
+    
 private:
     float playerPosition1X = 0.0f;
     float playerPosition1Y = 0.0f;

@@ -138,7 +138,7 @@ void Player::move(OBJ2D* obj,int t)
             {
                 num1 = -1;
             }
-            terrain[9].pos.y = terrain.pos.y + (3 * num1);
+            terrain[9].pos.y = terrain[9].pos.y + (3 * num1);
         }
 
         for (int i = 0; i < max1; ++i)
@@ -303,12 +303,12 @@ void Player2::move(OBJ2D* obj,int t)
         switch (t)
         {
         case 0:
-            min1 = 0;
-            max1 = 4;
+            min2 = 0;
+            max2 = 4;
             break;
         case 1:
-            min1 = 4;
-            max1 = 12;
+            min2 = 4;
+            max2 = 12;
             break;
         }
 
