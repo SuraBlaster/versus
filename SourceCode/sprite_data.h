@@ -27,6 +27,8 @@ extern GameLib::SpriteData sprPlayer_Up0;
 extern GameLib::SpriteData sprPlayer_Up1;
 extern GameLib::SpriteData sprPlayer_Up2;
 
+extern GameLib::SpriteData sprPlayer2_Up0;
+
 //‰E•à‚«
 extern GameLib::SpriteData sprPlayer_Right0;
 extern GameLib::SpriteData sprPlayer_Right1;

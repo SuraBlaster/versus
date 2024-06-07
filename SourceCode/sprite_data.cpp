@@ -33,6 +33,8 @@ SpriteData sprPlayer_Up0    = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 0, 128 * 0, 96, 
 SpriteData sprPlayer_Up1    = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 1, 128 * 0, 96, 128);
 SpriteData sprPlayer_Up2    = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 2, 128 * 0, 96, 128);
 
+SpriteData sprPlayer2_Up0 = SPRITE_BOTTOM(TEXNO::PLAYER2, 96 * 0, 128 * 0, 96, 128);
+
 //‰E•à‚«
 SpriteData sprPlayer_Right0 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 0, 128 * 1, 96, 128);
 SpriteData sprPlayer_Right1 = SPRITE_BOTTOM(TEXNO::PLAYER, 96 * 1, 128 * 1, 96, 128);

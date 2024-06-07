@@ -1,4 +1,5 @@
 #pragma once
+#include "..\GameLib\DirectXTK-master\Inc\Keyboard.h"
 
 
 //******************************************************************************
@@ -78,6 +79,7 @@ public:
     //void init();    // ‰Šú‰»
     //void update();  // XV
     //void draw();    // •`‰æ
+
 };
 
 

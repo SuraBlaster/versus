@@ -15,7 +15,6 @@ using namespace GameLib;
 //------< 変数 >----------------------------------------------------------------
 Game Game::instance_;
 
-
 //--------------------------------
 //  初期化処理
 //--------------------------------
@@ -25,6 +24,8 @@ void Game::init()
 
     playerManager_      = new PlayerManager;
     obj2d_ = new OBJ2D;
+    player1_ = new Player; // player1_のインスタンスを作成
+    player2_ = new Player2; // player2_のインスタンスを作成
     isPaused = false;   // ポーズフラグの初期化
 
     BackGround = 960;
@@ -38,6 +39,8 @@ void Game::deinit()
 {
     // 各マネージャの解放
     safe_delete(playerManager_);
+    safe_delete(player1_); // player1_の解放
+    safe_delete(player2_); // player2_の解放
 
     // テクスチャの解放
     texture::releaseAll();
