@@ -8,6 +8,8 @@ using namespace GameLib;
 Stage1 Stage1::instance_Stage1;
 Sprite* kabe;
 Sprite* hari;
+Sprite* blackdoor;
+Sprite* whitedoor;
 void Stage1::init()
 {
     Scene::init();	    // 基底クラスのinitを呼ぶ
@@ -20,6 +22,8 @@ void Stage1::init()
     isPaused = false;   // ポーズフラグの初期化
     kabe = sprite_load(L"./Data/Images/kabe.png");
     hari = sprite_load(L"./Data/Images/hari.png");
+    blackdoor = sprite_load(L"./data/Images/blackdoor.png");
+    whitedoor = sprite_load(L"./data/Images/whitedoor.png");
 }
 
 void Stage1::deinit()
@@ -145,4 +149,6 @@ void Stage1::draw()
     sprite_render(kabe, 0, 680,0.5f,0.5f);
     // プレイヤーの描画
     playerManager()->draw();
+
+    
 }

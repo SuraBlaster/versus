@@ -17,6 +17,7 @@ enum TEXNO
     PLAYER2,
     BACK_WHITE,
     BACK_BLACK,
+
 };
 
 extern GameLib::LoadTexture loadTexture[];

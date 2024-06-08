@@ -24,6 +24,9 @@ public:
 
 private:
     static Title instance_;
+    bool Flag;
+    int titleTimer;
+    int backpos;
 };
 
 //******************************************************************************

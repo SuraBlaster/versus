@@ -9,12 +9,14 @@
 //------< インクルード >---------------------------------------------------------
 #include "all.h"
 #include "stage.h"
+using namespace GameLib::input;
 //------< using >---------------------------------------------------------------
 using namespace GameLib;
 
 //------< 変数 >----------------------------------------------------------------
 Title Title::instance_;
 Sprite* sprtitle;
+Sprite* sprtri;
 //--------------------------------
 //  更新処理
 //--------------------------------
@@ -28,22 +30,60 @@ void Title::update()
         //////// 初期設定 ////////
 
         timer = 0;                                  // タイマーを初期化
+        Flag = false;
+        sprtitle = sprite_load(L"./Data/Images/revarse.png");
+        sprtri = sprite_load(L"./Data/Images/triangle.png");
+
         GameLib::setBlendMode(Blender::BS_ALPHA);   // 通常のアルファ処理
         sound::play(0,0);
-
+        titleTimer = 150;
         state++;                                    // 初期化処理の終了
 
         /*fallthrough*/                             // 意図的にbreak;を記述していない
 
     case 1:
         //////// 通常時の処理 ////////
-       
+        debug::setString("hasSword:%d", backpos);
 
         timer++;                            // タイマーを足す
 
         if (TRG(0) & PAD_START)             // PAD_TRG1が押されたら
-            changeScene(Stage::instance());  // ゲームシーンに切り替え
+        {
+            Flag = true;
+            //changeScene(Stage::instance());  // ステージシーンに切り替え
+        }
+            
+        if (Flag == true)
+        {
+            if (titleTimer < 100 && backpos <= 1080)
+            {
+                if (backpos <= 1080)
+                {
+                    backpos += 65;
+                }
+                else if (backpos <= 880)
+                {
+                    backpos += 50;
+                }
+                else if (backpos <= 680)
+                {
+                    backpos += 40;
+                }
+                else if (backpos <= 480)
+                {
+                    backpos += 30;
+                }
 
+            }
+            
+            
+            titleTimer--;
+
+            if (titleTimer <= 0)
+            {
+                changeScene(Stage::instance());
+            }
+        }
         break;
     }
 }
@@ -54,18 +94,27 @@ void Title::update()
 void Title::draw()
 {
     // 画面クリア
-    GameLib::clear(VECTOR4(0.2f, 0.3f, 1.0f, 1));
-    sprite_render(sprtitle, 0, 0);
-    // タイトル表示
-    font::textOut(4, "ECC COMP", { 60, 60 }, { 4, 4 }, { 1, 1, 0, 1 });
-    font::textOut(4, "Game Programming II", { 60, 160 }, { 2, 2 }, { 0, 1, 1, 1 });
+    //GameLib::clear(VECTOR4(0.2f, 0.3f, 1.0f, 1));
 
-    // "Push Start Button" 点滅
-    if (timer / 40 % 2)
+    sprite_render(sprtitle, 0, 0);
+   
+    if (Flag == true) 
     {
-        font::textOut(4, "Push Start Button", { 480, 540 }, { 2, 2 }, { 1, 0.5f, 0, 1 });
+        if (timer / 10 % 2)
+        {
+            sprite_render(sprtri, 850, 582, 0.13f, 0.13f, 0, 0, 572, 493, 0, 0, ToRadian(90));
+        }
     }
+    else
+    {
+        sprite_render(sprtri, 850, 582, 0.13f, 0.13f, 0, 0, 572, 493, 0, 0, ToRadian(90));
+    }
+   
+    
+    primitive::rect(0, 1080 - backpos,1920,1200,0,0,0,0,0,0);
 
 }
+
+
 
 //******************************************************************************
