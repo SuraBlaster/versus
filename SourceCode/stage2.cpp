@@ -113,7 +113,7 @@ void Stage2::update()
 void Stage2::draw()
 {
     GameLib::clear(VECTOR4(1, 1, 1, 1));
-    for (int i = 12; i < 18; ++i)
+    for (int i = 12; i < 24; ++i)
     {
         primitive::rect(
             terrain[i].pos,

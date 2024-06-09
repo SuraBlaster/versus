@@ -95,24 +95,7 @@ void Game::update()
 
     }
 
-    /*if (TRG(0) & PAD_TRG1)
-    {
-        if (BackGround > 0)
-        {
-            while (BackGround = 0)
-            {
-                BackGround--;
-            }
-        }
-        else
-        {
-            while (BackGround < 960)
-            {
-                BackGround++;
-            }
-        }
-    }*/
-
+   
 
     // デバッグ文字列表示
     debug::setString("state:%d", state);

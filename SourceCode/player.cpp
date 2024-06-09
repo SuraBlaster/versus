@@ -220,7 +220,7 @@ void Player::move(OBJ2D* obj,int t )
 
         debug::setString("onGround:%d", onGround);
         debug::setString("jumpTimer:%d", obj->jumpTimer);
-
+       
         //TODO_05 エリアチェック
         const float left = 0 + obj->size.x;
         const float right = window::getWidth() - obj->size.x;
