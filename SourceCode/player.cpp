@@ -217,7 +217,7 @@ void Player::move(OBJ2D* obj,int t)
         //TODO_04 ジャンプチェック
         if (onGround == true && TRG(0) & PAD_TRG1)
         {
-            obj->jumpTimer = 20;
+            obj->jumpTimer = 5;
         }
 
         //TODO_04 ジャンプ中
@@ -405,7 +405,7 @@ void Player2::move(OBJ2D* obj,int t)
         //TODO_04 ジャンプチェック
         if (onGround == true && TRG(0) & PAD_TRG1)
         {
-            obj->jumpTimer = 20;
+            obj->jumpTimer = 5;
         }
 
         //TODO_04 ジャンプ中

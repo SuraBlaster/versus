@@ -19,6 +19,7 @@ void Stage::update()
         timer = 0;                                  // タイマーを初期化
         GameLib::setBlendMode(Blender::BS_ALPHA);   // 通常のアルファ処理
         state++;                                    // 初期化処理の終了
+        stagetimer = 100;
         table = 0;
 
 
@@ -33,28 +34,84 @@ void Stage::update()
         {
             table++;
         }
-        if (TRG(0) & PAD_LEFT && table>0)
+        if (TRG(0) & PAD_LEFT && table > 0)
         {
             table--;
         }
 
+
+  
+        if (backpos >= -1080)
+        {
+            if (backpos >= -1080)
+            {
+                backpos += 65;
+            }
+            else if (backpos >= 880)
+            {
+                backpos += 50;
+            }
+            else if (backpos >= 680)
+            {
+                backpos += 40;
+            }
+            else if (backpos >= 480)
+            {
+                backpos += 30;
+            }
+
+        }
+
+
         if (TRG(0) & PAD_START)             // PAD_TRG1が押されたら
         {
-            switch (table)  //今持ってるtableのステージに行く
-            {
-            case 0:
-                changeScene(Tutorial::instance());
-                
-                break;
-            case 1:
-                changeScene(Stage1::instance());
-                break;
-            case 2:
-                changeScene(Stage2::instance());
-                break;
-            }
-         
+            Flag = true;
         }
+
+        if (Flag == true)
+        {
+            if (stagetimer < 50 && backpos2 <= 1080)
+            {
+                if (backpos2 <= 1080)
+                {
+                    backpos2 += 65;
+                }
+                else if (backpos2 <= 880)
+                {
+                    backpos2 += 50;
+                }
+                else if (backpos2 <= 680)
+                {
+                    backpos2 += 40;
+                }
+                else if (backpos2 <= 480)
+                {
+                    backpos2 += 30;
+                }
+
+            }
+
+
+            stagetimer--;
+
+            if (stagetimer <= 0)
+            {
+                switch (table)  //今持ってるtableのステージに行く
+                {
+                case 0:
+                    changeScene(Tutorial::instance());
+                    break;
+                case 1:
+                    changeScene(Stage1::instance());
+                    break;
+                case 2:
+                    changeScene(Stage2::instance());
+                    break;
+                }
+            }
+        }
+
+          
 
         break;
     }
@@ -100,4 +157,8 @@ void Stage::draw()
             primitive::rect(900, 500, 300, 300, 0, 0, 0, 0, 0, 0, 1);
         break;
     }
+
+    primitive::rect(0, 0 - backpos, 1920, 1080, 0, 0, 0, 0, 0, 0);
+
+    primitive::rect(0, 1080 - backpos2, 1920, 1200, 0, 0, 0, 0, 0, 0);
 }

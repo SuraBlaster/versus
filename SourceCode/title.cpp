@@ -50,7 +50,6 @@ void Title::update()
         if (TRG(0) & PAD_START)             // PAD_TRG1が押されたら
         {
             Flag = true;
-            //changeScene(Stage::instance());  // ステージシーンに切り替え
         }
             
         if (Flag == true)
