@@ -51,5 +51,7 @@ private:
     static Game instance_;
 };
 
+extern bool Door1;
+extern bool Door2;
 //******************************************************************************
 

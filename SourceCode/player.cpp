@@ -30,40 +30,12 @@ namespace
     //上方向
     AnimeData animePlayer_Up[] = {
         { &sprPlayer_Up0, 10 },
-        { &sprPlayer_Up1, 10 },
-        { &sprPlayer_Up2, 10 },
-        { &sprPlayer_Up1, 10 },
-        { nullptr, -1 },// 終了フラグ
     };
 
     AnimeData animePlayer2__Up[] = {
         {&sprPlayer2_Up0, 10}
     };
 
-    //右方向
-    AnimeData animePlayer_Right[] = {
-        { &sprPlayer_Right0, 10 },
-        { &sprPlayer_Right1, 10 },
-        { &sprPlayer_Right2, 10 },
-        { &sprPlayer_Right1, 10 },
-        { nullptr, -1 },// 終了フラグ
-    };
-    //下方向
-    AnimeData animePlayer_Down[] = {
-        { &sprPlayer_Down0, 10 },
-        { &sprPlayer_Down1, 10 },
-        { &sprPlayer_Down2, 10 },
-        { &sprPlayer_Down1, 10 },
-        { nullptr, -1 },// 終了フラグ
-    };
-    //左方向
-    AnimeData animePlayer_Left[] = {
-        { &sprPlayer_Left0, 10 },
-        { &sprPlayer_Left1, 10 },
-        { &sprPlayer_Left2, 10 },
-        { &sprPlayer_Left1, 10 },
-        { nullptr, -1 },// 終了フラグ
-    };
 }
 
 //--------------------------------
@@ -92,10 +64,10 @@ void Player::move(OBJ2D* obj,int t)
         //////// 初期設定 ////////
 
         //アニメの初期設定
-        animeData = animePlayer_Down;   // 初期値として下向きのアニメを設定する
+        animeData = animePlayer_Up;   // 初期値として下向きのアニメを設定する
 
         // サイズ設定（足元が中心であるため、幅はあたりとして使用する半分・縦はそのままが扱いやすい）
-        obj->size = VECTOR2(96 / 3, 128);
+        obj->size = VECTOR2(120, 120);
 
         obj->state++;
         switch (t)
@@ -103,14 +75,20 @@ void Player::move(OBJ2D* obj,int t)
         case 0:
             min1 = 0;
             max1 = 4;
+            mindoor1 = 0;
+            maxdoor1 = 2;
             break;
         case 1:
             min1 = 4;
             max1 = 12;
+            mindoor1 = 2;
+            maxdoor1 = 4;
             break;
         case 2:
             min1 = 12;
             max1 = 24;
+            mindoor1 = 4;
+            maxdoor1 = 6;
             break;
         }
 
@@ -145,7 +123,7 @@ void Player::move(OBJ2D* obj,int t)
             terrain[9].pos.y = terrain[9].pos.y + (3 * num1);
         }
 
-        for (int i = 0; i < max1; ++i)
+        for (int i = min1; i < max1; ++i)
         {
             if (Game::instance()->bgManager()->hitCheck(obj, terrain[i]))
             {
@@ -169,11 +147,9 @@ void Player::move(OBJ2D* obj,int t)
         {
         case PAD_LEFT:  // 左だけが押されている場合
             obj->speed.x -= KASOKU;
-            animeData = animePlayer_Left;
             break;
         case PAD_RIGHT: // 右だけが押されている場合
             obj->speed.x += KASOKU;
-            animeData = animePlayer_Right;
             break;
         default:        // どちらも押されていないか相殺されている場合
             if (obj->speed.x > 0)
@@ -203,7 +179,7 @@ void Player::move(OBJ2D* obj,int t)
         obj->position.x += obj->speed.x;
 
         
-        for (int i = 0; i < max1; ++i) {
+        for (int i = min1; i < max1; ++i) {
             if (Game::instance()->bgManager()->hitCheck(obj, terrain[i])) {
                 float dist;
                 if (obj->speed.x > 0)
@@ -242,8 +218,8 @@ void Player::move(OBJ2D* obj,int t)
         debug::setString("jumpTimer:%d", obj->jumpTimer);
 
         //TODO_05 エリアチェック
-        const float left = 0 + obj->size.x;
-        const float right = window::getWidth() - obj->size.x;
+        const float left = 0 + obj->size.x / 2;
+        const float right = window::getWidth() - obj->size.x / 2;
 
         if (obj->position.x < 0 + left)
         {
@@ -257,8 +233,23 @@ void Player::move(OBJ2D* obj,int t)
             obj->speed.x = 0;
         }
 
+        
+
+        for (int i = mindoor1; i < maxdoor1; ++i) {
+            if (Game::instance()->bgManager()->hitCheck(obj, door[i])) {
+                Door1 = true;
+                break;
+            }
+            else
+            {
+                Door1 = false;
+            }
+        }
+
         break;
     }
+
+    
 
     // アニメーション更新
     if (animeData)
@@ -302,21 +293,27 @@ void Player2::move(OBJ2D* obj,int t)
         animeData = animePlayer2__Up;   // 初期値として下向きのアニメを設定する
 
         // サイズ設定（足元が中心であるため、幅はあたりとして使用する半分・縦はそのままが扱いやすい）
-        obj->size = VECTOR2(96 / 3, 128);
+        obj->size = VECTOR2(120, 120);
 
         switch (t)
         {
         case 0:
             min2 = 0;
             max2 = 4;
+            mindoor2 = 0;
+            maxdoor2 = 2;
             break;
         case 1:
             min2 = 4;
             max2 = 12;
+            mindoor2 = 2;
+            maxdoor2 = 4;
             break;
         case 2:
             min2 = 12;
             max2 = 24;
+            mindoor2 = 4;
+            maxdoor2 = 6;
             break;
         }
 
@@ -434,8 +431,8 @@ void Player2::move(OBJ2D* obj,int t)
         debug::setString("jumpTimer:%d", obj->jumpTimer);
 
         //TODO_05 エリアチェック
-        const float left = 0 + obj->size.x;
-        const float right = window::getWidth() - obj->size.x;
+        const float left = 0 + obj->size.x / 2;
+        const float right = window::getWidth() - obj->size.x / 2;
 
         if (obj->position.x < 0 + left)
         {
@@ -449,8 +446,22 @@ void Player2::move(OBJ2D* obj,int t)
             obj->speed.x = 0;
         }
 
+        for (int i = mindoor2; i < maxdoor2; ++i) {
+            if (Game::instance()->bgManager()->hitCheck(obj, door[i])) {
+                Door2 = true;
+                break;
+            }
+            else
+            {
+                Door2 = false;
+            }
+        };
+
         break;
     }
+
+    
+
 
     // アニメーション更新
     if (animeData)

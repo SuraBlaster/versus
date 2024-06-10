@@ -20,6 +20,9 @@ void Stage::update()
         GameLib::setBlendMode(Blender::BS_ALPHA);   // 通常のアルファ処理
         state++;                                    // 初期化処理の終了
         stagetimer = 100;
+        Flag = false;
+        backpos = 0;
+        backpos2 = 0;
         table = 0;
 
 

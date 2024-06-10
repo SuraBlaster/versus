@@ -29,4 +29,9 @@ private:
     OBJ2D* obj2d_;
     BG* bgManager_;
     static Tutorial instance_tutorial;
+
+    
 };
+
+static Sprite* blackdoor;
+static Sprite* whitedoor;

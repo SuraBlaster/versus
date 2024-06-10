@@ -43,7 +43,7 @@ void Title::update()
 
     case 1:
         //////// 通常時の処理 ////////
-        debug::setString("hasSword:%d", backpos);
+        
 
         timer++;                            // タイマーを足す
 

@@ -103,7 +103,7 @@ void Stage2::update()
     case 1:
         //////// ’Êí‚Ìˆ— ////////
        
-        playerManager()->update(1);
+        playerManager()->update(2);
 
         timer++;
         break;

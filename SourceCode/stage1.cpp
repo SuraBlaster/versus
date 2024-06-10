@@ -1,4 +1,5 @@
 #include "stage1.h"
+#include "tutorial.h"
 #include "../GameLib/game_lib.h"
 #include "../GameLib/input_manager.h"
 #include "sprite_data.h"
@@ -21,8 +22,8 @@ void Stage1::init()
     isPaused = false;   // ポーズフラグの初期化
     kabe = sprite_load(L"./Data/Images/kabe.png");
     hari = sprite_load(L"./Data/Images/hari.png");
-    //blackdoor = sprite_load(L"./data/Images/blackdoor.png");
-    //whitedoor = sprite_load(L"./data/Images/whitedoor.png");
+    blackdoor = sprite_load(L"./data/Images/blackdoor.png");
+    whitedoor = sprite_load(L"./data/Images/whitedoor.png");
 }
 
 void Stage1::deinit()
@@ -132,7 +133,7 @@ void Stage1::update()
 
         // プレイヤー（自分で操作）を追加する
         playerManager()->add(&player, VECTOR2(window::getWidth() / 8, window::getHeight() / 2));
-        playerManager()->add(&player2p, VECTOR2(window::getWidth() / 8, 1000));
+        playerManager()->add(&player2p, VECTOR2(window::getWidth() / 8, 990));
         //playerManager()->add(&player[1], VECTOR2(window::getWidth() / 3, 900));
 
        
@@ -172,13 +173,30 @@ void Stage1::draw()
         );
     }
 
+    for (int i = 2; i < 4; ++i)
+    {
+        primitive::rect(
+            door[i].pos,
+            door[i].hsize * 2,
+            door[i].hsize, 0,
+            { 1, 0, 1, 1 }
+        );
+    }
+
     for (int i = 500; i < 1360; i += 60)
     {
         sprite_render(hari,i, 470, 0.5f, 0.5f);
-        sprite_render(hari,i, 1000, 0.5f, 0.5f);
+        sprite_render(hari,i, 1010, 0.5f, 0.5f);
     }
 
+
+
     sprite_render(kabe, 0, 680,0.5f,0.5f);
+
+    sprite_render(whitedoor, 10, 780, 0.5f, 0.62f);
+
+    sprite_render(blackdoor, 1650, 830, 0.5f, 0.62f);
+
     // プレイヤーの描画
     playerManager()->draw();
 

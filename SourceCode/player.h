@@ -34,6 +34,9 @@ private:
     int min1 = 0;
     int max1 = 0;
     int num1 = 0;
+    int mindoor1 = 0;
+    int maxdoor1 = 0;
+
 };
 
 // 移動アルゴリズムの実体
@@ -53,6 +56,8 @@ private:
     int min2 = 0;
     int max2 = 0;
     int num2 = 0;
+    int mindoor2 = 0;
+    int maxdoor2 = 0;
 };
 
 // 移動アルゴリズムの実体
@@ -93,4 +98,5 @@ public:
 
 
 //------< ワーク用 >-------------------------------------------------------------
+
 
