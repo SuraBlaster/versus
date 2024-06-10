@@ -112,7 +112,7 @@ void Player::move(OBJ2D* obj,int t)
 
         if (t == 1)
         {
-            if (terrain[9].pos.y == 1100)
+            if (terrain[9].pos.y == 1120)
             {
                 num1 = 1;
             }
@@ -120,7 +120,7 @@ void Player::move(OBJ2D* obj,int t)
             {
                 num1 = -1;
             }
-            terrain[9].pos.y = terrain[9].pos.y + (3 * num1);
+            terrain[9].pos.y = terrain[9].pos.y + (2 * num1);
 
             if (Game::instance()->bgManager()->hitCheck(obj, terrain[21]) || Game::instance()->bgManager()->hitCheck(obj, terrain[22]))
             {

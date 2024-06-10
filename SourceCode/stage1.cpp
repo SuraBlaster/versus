@@ -145,7 +145,7 @@ void Stage1::update()
 
     case 1:
         //////// ’Êí‚Ìˆ— ////////
-        if (terrain[9].pos.y == 1100)
+        if (terrain[9].pos.y == 1120)
         {
             num = 1;
         }
@@ -153,7 +153,7 @@ void Stage1::update()
         {
             num = -1;
         }
-        terrain[9].pos.y += 3 * num;
+        terrain[9].pos.y += 2 * num;
 
         if (death == true)
         {
