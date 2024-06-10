@@ -10,7 +10,9 @@ using namespace GameLib;
 Tutorial Tutorial::instance_tutorial;
 Sprite* blackdoor;
 Sprite* whitedoor;
-
+VECTOR2 Pos;
+Sprite* key;
+Sprite* rkey;
 
 void Tutorial::init()
 {
@@ -25,6 +27,8 @@ void Tutorial::init()
     BackGround = 960;
     blackdoor = sprite_load(L"./data/Images/blackdoor.png");
     whitedoor = sprite_load(L"./data/Images/whitedoor.png");
+    key = sprite_load(L"./Data/Images/key.png");
+    rkey = sprite_load(L"./Data/Images/r.png");
     Door1 = false;
     Door2 = false;
 }
@@ -169,8 +173,14 @@ void Tutorial::draw()
         );
     }
 
-
-
+    if (Pos.x < 650)
+    {
+        sprite_render(key, Pos.x + 20, Pos.y - 300, 0.2f, 0.2f);
+    }
+    if (Pos.x > 650)
+    {
+        sprite_render(rkey, Pos.x + 20, Pos.y - 300, 0.2f, 0.2f);
+    }
     sprite_render(whitedoor, 1680, 300, 0.5f, 0.62f);
 
     sprite_render(blackdoor, 1680, 830, 0.5f, 0.62f);

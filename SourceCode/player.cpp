@@ -63,7 +63,7 @@ void Player::move(OBJ2D* obj, int t)
     {
     case 0:
         //////// 初期設定 ////////
-
+       
         //アニメの初期設定
         animeData = animePlayer_Up;   // 初期値として下向きのアニメを設定する
 
@@ -109,7 +109,7 @@ void Player::move(OBJ2D* obj, int t)
         obj->speed.y = (std::max)(obj->speed.y, -SPEED_MAX_Y);
         obj->position.y += obj->speed.y;
 
-
+        
 
         if (t == 1)
         {
@@ -198,7 +198,7 @@ void Player::move(OBJ2D* obj, int t)
             }
         }
 
-
+        Pos = obj->position;
 
         //TODO_04 ジャンプチェック
         if (onGround == true && TRG(0) & PAD_TRG1)
