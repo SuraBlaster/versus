@@ -1,11 +1,12 @@
 #include "all.h"
+#include "stage.h"
 using namespace GameLib::input;
 
 //------< using >---------------------------------------------------------------
 using namespace GameLib;
 Player* playerPosition;
 Player2* playerPosition2;
-
+bool death;
 //******************************************************************************
 //
 //      プレイヤー移動処理
@@ -89,7 +90,7 @@ void Player::move(OBJ2D* obj,int t )
         // サイズ設定（足元が中心であるため、幅はあたりとして使用する半分・縦はそのままが扱いやすい）
         obj->size = VECTOR2(96 / 3, 128);
 
-        obj->state++;
+       
         switch (t)
         {
         case 0:
@@ -100,8 +101,13 @@ void Player::move(OBJ2D* obj,int t )
             min1 = 4;
             max1 = 12;
             break;
+        case 2:
+            min1 = 12;
+            max1 = 21;
+            break;
         }
-      
+        death = false;
+        obj->state++;
         break;
 
     case 1:
@@ -128,6 +134,11 @@ void Player::move(OBJ2D* obj,int t )
                 num1 = -1;
             }
             terrain[9].pos.y = terrain[9].pos.y+ (3 * num1);
+            
+            if (Game::instance()->bgManager()->hitCheck(obj, terrain[21]) || Game::instance()->bgManager()->hitCheck(obj, terrain[22]))
+            {
+                death = true;
+            }
         }
         for (int i = min1; i < max1; ++i)
         {
@@ -152,6 +163,7 @@ void Player::move(OBJ2D* obj,int t )
         case PAD_LEFT:  // 左だけが押されている場合
             obj->speed.x -= KASOKU;
             animeData = animePlayer_Left;
+           
             break;
         case PAD_RIGHT: // 右だけが押されている場合
             obj->speed.x += KASOKU;
@@ -294,7 +306,12 @@ void Player2::move(OBJ2D* obj,int t)
             min2 = 4;
             max2 = 12;
             break;
+        case 2:
+            min2 = 12;
+            max2 = 21;
+            break;
         }
+        death = false;
         obj->state++;
 
         break;
@@ -331,6 +348,13 @@ void Player2::move(OBJ2D* obj,int t)
             }
         }
 
+        if (t == 0)
+        {
+            if (Game::instance()->bgManager()->hitCheck(obj, terrain[21]) || Game::instance()->bgManager()->hitCheck(obj, terrain[22]))
+            {
+                death = true;
+            }
+        }
         //TODO_03 左右入力の取り出し
         switch (STATE(0) & (PAD_LEFT | PAD_RIGHT))
         {

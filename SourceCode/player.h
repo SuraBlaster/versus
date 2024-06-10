@@ -3,7 +3,7 @@
 #include "obj2d.h"
 #include "work.h"
 #include "..\GameLib\DirectXTK-master\Inc\Keyboard.h"
-
+#include "scene.h"
 
 //******************************************************************************
 //
@@ -20,7 +20,7 @@
 //==============================================================================
 
 // プレイヤー操作クラス
-class Player : public MoveAlg
+class Player : public MoveAlg , public Scene
 {
 public:
     void move(OBJ2D* obj,int t);
@@ -40,7 +40,7 @@ private:
 EXTERN Player player;
 
 
-class Player2 : public MoveAlg
+class Player2 : public MoveAlg,public Scene
 {
 public:
     void move(OBJ2D* obj,int t);
@@ -93,3 +93,4 @@ public:
 
 };
 
+extern bool death;

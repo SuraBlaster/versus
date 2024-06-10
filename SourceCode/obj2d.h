@@ -13,7 +13,7 @@
 #include "../GameLib/obj2d_data.h"
 
 
-#define TERRAIN_NUM (24)
+#define TERRAIN_NUM (26)
 // 前方宣言
 class OBJ2D;
 
@@ -108,6 +108,7 @@ public:
     OBJ2D* add(MoveAlg* mvAlg, const VECTOR2& pos = VECTOR2(0, 0)); // objListに新たなOBJ2Dを追加する
     std::list<OBJ2D>* getList() { return &objList; }                // objListを取得する
 
+    bool deth();
 };
 
 struct object
@@ -142,5 +143,9 @@ static object terrain[TERRAIN_NUM] = {
     {{600,1000},{30,500},{}},
     {{1200,1000},{30,500},{}},
     {{900,1000},{300,30},{}},
-    {{900,550},{300,30},{}}
+    {{900,550},{300,30},{}},
+
+    //ステージ１の針の当たり判定
+    {{950,500},{450,20},{} },
+    {{950,1020},{450,20},{}}
 };

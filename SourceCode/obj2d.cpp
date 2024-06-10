@@ -143,6 +143,14 @@ OBJ2D* OBJ2DManager::add(MoveAlg* mvAlg, const VECTOR2& pos)
     return &(*objList.rbegin());        // 今追加したobjのアドレスを返す（何かで使えるように）
 }
 
+bool OBJ2DManager::deth()
+{
+    return false;
+}
+
+
+    
+ 
 //--------------------------------
 //  更新
 //--------------------------------

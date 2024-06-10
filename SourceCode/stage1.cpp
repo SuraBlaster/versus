@@ -3,6 +3,8 @@
 #include "../GameLib/input_manager.h"
 #include "sprite_data.h"
 #include "common.h"
+#include "stage.h"
+
 using namespace GameLib::input;
 using namespace GameLib;
 Stage1 Stage1::instance_Stage1;
@@ -144,7 +146,14 @@ void Stage1::update()
         }
         terrain[9].pos.y += 3 * num;
         playerManager()->update(1);
-
+        if (death == true)
+        {
+            for (int i = 1080; i > 0; i--)
+            {
+                primitive::rect(0, i, 1920, 1080);
+            }
+            changeScene(Stage::instance());
+        }
         timer++;
         break;
     }
@@ -163,7 +172,7 @@ void Stage1::draw()
             { 1, 0, 1, 1 }
         );
     }
-
+   
     for (int i = 500; i < 1360; i += 60)
     {
         sprite_render(hari,i, 470, 0.5f, 0.5f);

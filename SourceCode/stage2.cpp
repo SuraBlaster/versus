@@ -103,7 +103,7 @@ void Stage2::update()
     case 1:
         //////// ’ÊíŽž‚Ìˆ— ////////
        
-        playerManager()->update(1);
+        playerManager()->update(2);
 
         timer++;
         break;
@@ -113,7 +113,7 @@ void Stage2::update()
 void Stage2::draw()
 {
     GameLib::clear(VECTOR4(1, 1, 1, 1));
-    for (int i = 12; i < 24; ++i)
+    for (int i = 12; i < 22; ++i)
     {
         primitive::rect(
             terrain[i].pos,
