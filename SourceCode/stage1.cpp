@@ -4,6 +4,8 @@
 #include "../GameLib/input_manager.h"
 #include "sprite_data.h"
 #include "common.h"
+#include "game.h"
+#include "stage.h"
 using namespace GameLib::input;
 using namespace GameLib;
 Stage1 Stage1::instance_Stage1;
@@ -22,8 +24,6 @@ void Stage1::init()
     isPaused = false;   // ポーズフラグの初期化
     kabe = sprite_load(L"./Data/Images/kabe.png");
     hari = sprite_load(L"./Data/Images/hari.png");
-    blackdoor = sprite_load(L"./data/Images/blackdoor.png");
-    whitedoor = sprite_load(L"./data/Images/whitedoor.png");
 }
 
 void Stage1::deinit()
@@ -155,6 +155,12 @@ void Stage1::update()
         playerManager()->update(1);
 
         timer++;
+
+        if (Door1 == true && Door2 == true)
+        {
+            changeScene(Stage::instance());
+        }
+
         break;
     }
 }
@@ -193,9 +199,32 @@ void Stage1::draw()
 
     sprite_render(kabe, 0, 680,0.5f,0.5f);
 
-    sprite_render(whitedoor, 10, 780, 0.5f, 0.62f);
+    //sprite_render(whitedoor, 10, 780, 0.5f, 0.62f);
 
-    sprite_render(blackdoor, 1650, 830, 0.5f, 0.62f);
+
+    GameLib::texture::begin(WHITE_DOOR);
+    GameLib::texture::draw(WHITE_DOOR,
+        40, 770,  //位置
+        0.5f, 0.66f,//大きさ
+        0, 0,       //切り抜き位置
+        240, 360, //切り抜きサイズ
+        0, 0,
+        0
+    );
+    GameLib::texture::end(WHITE_DOOR);
+
+    GameLib::texture::begin(BLACK_DOOR);
+    GameLib::texture::draw(BLACK_DOOR,
+        1680, 230,  //位置
+        0.5f, 0.66f,//大きさ
+        0, 0,       //切り抜き位置
+        240, 360, //切り抜きサイズ
+        0, 0,
+        0
+    );
+    GameLib::texture::end(BLACK_DOOR);
+
+   
 
     // プレイヤーの描画
     playerManager()->draw();

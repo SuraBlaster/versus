@@ -33,5 +33,3 @@ private:
     
 };
 
-static Sprite* blackdoor;
-static Sprite* whitedoor;

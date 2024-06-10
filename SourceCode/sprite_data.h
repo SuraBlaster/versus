@@ -17,6 +17,8 @@ enum TEXNO
     PLAYER2,
     BACK_WHITE,
     BACK_BLACK,
+    BLACK_DOOR,
+    WHITE_DOOR,
 
 };
 
