@@ -51,3 +51,5 @@ private:
     BG* bgManager_;
     static Game instance_;
 };
+extern bool Door1;
+extern bool Door2;

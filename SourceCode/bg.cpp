@@ -54,8 +54,8 @@ void BG::drawGameClear()
 
 bool BG::hitCheck(OBJ2D* rc1, object rc2)
 {
-    const float rc1Left = rc1->position.x - rc1->size.x;
-    const float rc1Right = rc1->position.x + rc1->size.x;
+    const float rc1Left = rc1->position.x - rc1->size.x / 2;
+    const float rc1Right = rc1->position.x + rc1->size.x / 2;
     const float rc1Top = rc1->position.y - rc1->size.y;
     const float rc1Bottom = rc1->position.y;
 
@@ -90,7 +90,7 @@ float BG::checkUp(OBJ2D* rc1, object rc2)
 
 float BG::checkRight(OBJ2D* rc1, object rc2)
 {
-    const float rc1Right = rc1->position.x + rc1->size.x;
+    const float rc1Right = rc1->position.x + rc1->size.x / 2;
     const float rc2Left = rc2.pos.x - rc2.hsize.x;
 
     return rc2Left - rc1Right - ADJUST;
@@ -98,7 +98,7 @@ float BG::checkRight(OBJ2D* rc1, object rc2)
 
 float BG::checkLeft(OBJ2D* rc1, object rc2)
 {
-    const float rc1Left = rc1->position.x - rc1->size.x;
+    const float rc1Left = rc1->position.x - rc1->size.x / 2;
     const float rc2Right = rc2.pos.x + rc2.hsize.x;
 
     return rc2Right - rc1Left + ADJUST;

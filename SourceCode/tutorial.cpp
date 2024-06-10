@@ -1,13 +1,16 @@
 #include "tutorial.h"
+#include "stage.h"
 #include "../GameLib/game_lib.h"
 #include "../GameLib/input_manager.h"
 #include "sprite_data.h"
 #include "common.h"
+#include "game.h"
 using namespace GameLib::input;
 using namespace GameLib;
 Tutorial Tutorial::instance_tutorial;
-Sprite* TdoorB;
-Sprite* TdoorW;
+
+Sprite* blackdoor;
+Sprite* whitedoor;
 
 void Tutorial::init()
 {
@@ -20,9 +23,10 @@ void Tutorial::init()
     player2_ = new Player2; // player2_のインスタンスを作成
     isPaused = false;   // ポーズフラグの初期化
     BackGround = 960;
-    TdoorB = sprite_load(L"./Data/Images/doorB.png ");
-    TdoorW = sprite_load(L"./Data/Images/doorW.png");
-
+    blackdoor = sprite_load(L"./data/Images/blackdoor.png");
+    whitedoor = sprite_load(L"./data/Images/whitedoor.png");
+    Door1 = false;
+    Door2 = false;
 }
 
 void Tutorial::deinit()
@@ -42,7 +46,7 @@ void Tutorial::update()
 {
     if (TRG(0) & PAD_RKey)
     {
-        
+
 
         //プレイヤーの数
         int player_count = 0;
@@ -78,9 +82,12 @@ void Tutorial::update()
             if (player_count == 2)it.position.y = player1_position.y;
         }
 
-      
+
 
     }
+
+
+
     switch (state)
     {
     case 0:
@@ -100,7 +107,7 @@ void Tutorial::update()
         playerManager()->add(&player2p, VECTOR2(window::getWidth() / 3, 900));
         //playerManager()->add(&player[1], VECTOR2(window::getWidth() / 3, 900));
 
-       
+
 
         state++;    // 初期化処理の終了
 
@@ -110,14 +117,25 @@ void Tutorial::update()
         //////// 通常時の処理 ////////
 
         timer++;
-       
+
         if (TRG(0) & PAD_RKey)
         {
             if (rectposy == YUKA)rectposy = 0;
             else if (rectposy == 0)rectposy = YUKA;
         }
+
+
+
+        debug::setString("Door1:%d", Door1);
+        debug::setString("Door2:%d", Door2);
+
         // プレイヤーの更新
         playerManager()->update(0);
+
+        if (Door1 == true && Door2 == true)
+        {
+            changeScene(Stage::instance());
+        }
 
         break;
     }
@@ -127,8 +145,9 @@ void Tutorial::draw()
 {
     GameLib::clear(VECTOR4(1, 1, 1, 1));
 
-    primitive::rect(0, rectposy, 1900, 500, 0, 0, 0, 0, 0, 0, 1);
+    bgManager_->drawGame1(BACK_WHITE);
 
+    primitive::rect(0, rectposy, 1920, 540, 0, 0, 0, 0, 0, 0, 1);
 
     for (int i = 0; i < 4; ++i)
     {
@@ -139,8 +158,23 @@ void Tutorial::draw()
             { 1, 0, 1, 1 }
         );
     }
-   
+
+    for (int i = 0; i < 2; ++i)
+    {
+        primitive::rect(
+            door[i].pos,
+            door[i].hsize * 2,
+            door[i].hsize, 0,
+            { 1, 0, 1, 1 }
+        );
+    }
+
+
+
+    sprite_render(whitedoor, 1680, 300, 0.5f, 0.62f);
+
     
+    sprite_render(blackdoor, 1680, 830, 0.5f, 0.62f);
     // プレイヤーの描画
     playerManager()->draw();
 

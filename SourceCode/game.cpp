@@ -73,29 +73,92 @@ void Game::update()
             player_count++;
 
             //位置を保存
-            if (player_count == 1)player1_position.y = it.position.y;
-            if (player_count == 2)player2_position.y = it.position.y;
+            if (player_count == 1)player1_position = it.position;
+            if (player_count == 2)player2_position = it.position;
         }
 
         //初期化
         player_count = 0;
         //
+        VECTOR2 velocity = { 8.0f,0 };
+        VECTOR2 velocity2 = { -8.0f,0 };
+        VECTOR2 toPlayer1, toPlayer2;
+        float rotation = 0.0f;
+
+        toPlayer1 = player1_position - player2_position;
+        toPlayer2 = player2_position - player1_position;
+        /*float length1 = sqrtf(toPlayer1.x * toPlayer1.x + toPlayer1.y * toPlayer1.y);
+        float length2 = sqrtf(toPlayer2.x * toPlayer2.x + toPlayer2.y * toPlayer2.y);*/
+        /*velocity1.y = toPlayer1.y / length1 * 0.001f;
+        velocity2.y = toPlayer2.y / length2 * 0.001f;*/
+
+        float cross1 = velocity.x * toPlayer1.y - velocity.y * toPlayer1.x;
+        float cross2 = velocity.x * toPlayer2.y - velocity.y * toPlayer2.x;
+
+        if (cross1 > 0 || cross2 > 0)
+        {
+            rotation += 0.025f;
+        }
+        else if (cross1 < 0 || cross2 < 0)
+        {
+            rotation -= 0.025f;
+        }
+
+        velocity = -VECTOR2(cosf(rotation), sinf(rotation)) * 8.0f;
+
 
         // プレイヤーマネージャーの全ての要素をループ
         for (auto& it : *playerManager_->getList())
         {
+
             //カウントを取ってプレイヤーの種類を判別
             player_count++;
 
             //保存した位置を変更
-            if (player_count == 1)it.position.y = player2_position.y;
-            if (player_count == 2)it.position.y = player1_position.y;
+
+            if (player_count == 1)
+            {
+                if (player1_position.y < 540)
+                {
+                    while (player2_position.y >= it.position.y)
+                    {
+                        it.position.y -= velocity.y;
+                    }
+                }
+                else
+                {
+                    while (player2_position.y <= it.position.y)
+                    {
+                        it.position.y += velocity.y;
+                    }
+                }
+            }
+
+            if (player_count == 2)
+            {
+                if (player2_position.y > 540)
+                {
+                    while (player1_position.y <= it.position.y)
+                    {
+                        it.position.y += velocity.y;
+                    }
+                }
+                else
+                {
+                    while (player1_position.y >= it.position.y)
+                    {
+                        it.position.y -= velocity.y;
+                    }
+                }
+            }
+            /*if (player_count == 1)it.position.y = player2_position.y;
+            if (player_count == 2)it.position.y = player1_position.y;*/
+
         }
 
 
     }
 
-   
 
     // デバッグ文字列表示
     debug::setString("state:%d", state);
@@ -123,7 +186,9 @@ void Game::update()
         // プレイヤー（自分で操作）を追加する
         playerManager()->add(&player, VECTOR2(window::getWidth() / 3, window::getHeight() / 3));
         playerManager()->add(&player2p, VECTOR2(window::getWidth() / 3, 900));
-        //playerManager()->add(&player[1], VECTOR2(window::getWidth() / 3, 900));
+
+
+
 
         state++;    // 初期化処理の終了
 
@@ -133,6 +198,8 @@ void Game::update()
         //////// 通常時の処理 ////////
 
         timer++;
+
+
 
         // プレイヤーの更新
         playerManager()->update(1);
@@ -192,7 +259,7 @@ void Game::draw()
     ,1,0,0);*/
 
 
-   /* for (int i = 0; i < TERRAIN_NUM; ++i)
+    for (int i = 0; i < TERRAIN_NUM; ++i)
     {
         primitive::rect(
             terrain[i].pos,
@@ -200,7 +267,7 @@ void Game::draw()
             terrain[i].hsize, 0,
             { 1, 0, 1, 1 }
         );
-    }*/
+    }
 
 
 
@@ -209,3 +276,6 @@ void Game::draw()
 
 
 }
+
+bool Door1;
+bool Door2;

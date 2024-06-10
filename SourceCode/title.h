@@ -1,17 +1,16 @@
-#ifndef INCLUDED_TITLE
-#define	INCLUDED_TITLE
+ï»¿#pragma once
 
 //******************************************************************************
 //
 //
-//      ƒ^ƒCƒgƒ‹ƒV[ƒ“
+//      Âƒ^ÂƒCÂƒgÂƒâ€¹ÂƒVÂ[Âƒâ€œ
 //
 //
 //******************************************************************************
 
 //==============================================================================
 //
-//      TitleƒNƒ‰ƒX
+//      TitleÂƒNÂƒâ€°ÂƒX
 //
 //==============================================================================
 
@@ -20,13 +19,12 @@ class Title : public Scene
 public:
     static Title* instance() { return &instance_; }
 
-	void update();
-	void draw();
+    void update();
+    void draw();
 
 private:
     static Title instance_;
+    bool Flag;
+    int titleTimer;
+    int backpos;
 };
-
-//******************************************************************************
-
-#endif // !INCLUDED_TITLE

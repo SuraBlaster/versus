@@ -10,4 +10,8 @@ public:
 
 private:
     static Stage instance_;
+    int backpos;
+    int backpos2;
+    bool Flag;
+    int stagetimer;
 };
