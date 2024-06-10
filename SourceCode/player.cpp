@@ -108,6 +108,10 @@ void Player::move(OBJ2D* obj,int t)
             min1 = 4;
             max1 = 12;
             break;
+        case 2:
+            min1 = 12;
+            max1 = 24;
+            break;
         }
 
         break;
@@ -309,6 +313,10 @@ void Player2::move(OBJ2D* obj,int t)
         case 1:
             min2 = 4;
             max2 = 12;
+            break;
+        case 2:
+            min2 = 12;
+            max2 = 24;
             break;
         }
 

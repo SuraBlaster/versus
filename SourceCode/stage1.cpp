@@ -8,8 +8,7 @@ using namespace GameLib;
 Stage1 Stage1::instance_Stage1;
 Sprite* kabe;
 Sprite* hari;
-Sprite* blackdoor;
-Sprite* whitedoor;
+
 void Stage1::init()
 {
     Scene::init();	    // 基底クラスのinitを呼ぶ
@@ -22,8 +21,8 @@ void Stage1::init()
     isPaused = false;   // ポーズフラグの初期化
     kabe = sprite_load(L"./Data/Images/kabe.png");
     hari = sprite_load(L"./Data/Images/hari.png");
-    blackdoor = sprite_load(L"./data/Images/blackdoor.png");
-    whitedoor = sprite_load(L"./data/Images/whitedoor.png");
+    //blackdoor = sprite_load(L"./data/Images/blackdoor.png");
+    //whitedoor = sprite_load(L"./data/Images/whitedoor.png");
 }
 
 void Stage1::deinit()
@@ -50,8 +49,8 @@ void Stage1::update()
         //プレイヤーの位置保存
         VECTOR2 player1_position, player2_position;
 
-        OBJ2D player1, player2;
-
+        //OBJ2D player1, player2;
+        VECTOR2 sa1, sa2;
 
         // プレイヤーマネージャーの全ての要素をループ
         for (auto& it : *playerManager_->getList())
@@ -60,8 +59,38 @@ void Stage1::update()
             player_count++;
 
             //位置を保存
-            if (player_count == 1)player1_position.y = it.position.y;
-            if (player_count == 2)player2_position.y = it.position.y;
+            /*if (player_count == 1)player1_position.y = it.position.y;
+            if (player_count == 2)player2_position.y = it.position.y;*/
+
+            if (player_count == 1)
+            {
+                if (it.position.y < 500)
+                {
+                    sa1.y = 500 - it.position.y;
+                    player1_position.y = 500;
+                }
+                else if (it.position.y > 500 && it.position.y < 1030)
+                {
+                    sa1.y = 1030 - it.position.y;
+                    player1_position.y = 1030;
+                }
+
+            }
+            if (player_count == 2)
+            {
+                if (it.position.y < 500)
+                {
+                    sa2.y = 500 - it.position.y;
+                    player2_position.y = 500;
+                }
+                else if (it.position.y > 500 && it.position.y < 1030)
+                {
+                    sa2.y = 1030 - it.position.y;
+                    player2_position.y = 1030;
+                }
+
+            }
+
         }
 
         //初期化
@@ -75,8 +104,11 @@ void Stage1::update()
             player_count++;
 
             //保存した位置を変更
-            if (player_count == 1)it.position.y = player2_position.y;
-            if (player_count == 2)it.position.y = player1_position.y;
+            /*if (player_count == 1)it.position.y = player2_position.y;
+            if (player_count == 2)it.position.y = player1_position.y;*/
+
+            if (player_count == 1)it.position.y = player2_position.y - sa1.y;
+            if (player_count == 2)it.position.y = player1_position.y - sa2.y;
         }
 
        
@@ -128,7 +160,7 @@ void Stage1::update()
 
 void Stage1::draw()
 {
-    GameLib::clear(VECTOR4(1, 1, 1, 1));
+    GameLib::clear(VECTOR4(0, 1, 1, 1));
 
     for (int i = 4; i < 12; ++i)
     {

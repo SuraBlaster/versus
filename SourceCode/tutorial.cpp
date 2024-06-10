@@ -6,6 +6,9 @@
 using namespace GameLib::input;
 using namespace GameLib;
 Tutorial Tutorial::instance_tutorial;
+Sprite* blackdoor;
+Sprite* whitedoor;
+
 
 void Tutorial::init()
 {
@@ -18,6 +21,9 @@ void Tutorial::init()
     player2_ = new Player2; // player2_のインスタンスを作成
     isPaused = false;   // ポーズフラグの初期化
     BackGround = 960;
+    blackdoor = sprite_load(L"./data/Images/blackdoor.png");
+    whitedoor = sprite_load(L"./data/Images/whitedoor.png");
+
 }
 
 void Tutorial::deinit()

@@ -36,7 +36,7 @@ void Title::update()
 
         GameLib::setBlendMode(Blender::BS_ALPHA);   // 通常のアルファ処理
         sound::play(0,0);
-        titleTimer = 150;
+        titleTimer = 100;
         state++;                                    // 初期化処理の終了
 
         /*fallthrough*/                             // 意図的にbreak;を記述していない
@@ -54,7 +54,7 @@ void Title::update()
             
         if (Flag == true)
         {
-            if (titleTimer < 100 && backpos <= 1080)
+            if (titleTimer < 50 && backpos <= 1080)
             {
                 if (backpos <= 1080)
                 {
