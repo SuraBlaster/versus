@@ -3,13 +3,15 @@
 #include "../GameLib/input_manager.h"
 #include "sprite_data.h"
 #include "common.h"
+#include "game.h"
+#include "stage.h"
 using namespace GameLib::input;
 using namespace GameLib;
 Stage2 Stage2::instance_Stage2;
 void Stage2::init()
 {
     Scene::init();	    // 基底クラスのinitを呼ぶ
-    rectposy = 550;
+    rectposy = 500;
 
     playerManager_ = new PlayerManager;
     obj2d_ = new OBJ2D;
@@ -102,9 +104,17 @@ void Stage2::update()
 
     case 1:
         //////// 通常時の処理 ////////
-       
-        playerManager()->update(2);
 
+        playerManager()->update(2);
+        if (TRG(0) & PAD_RKey)
+        {
+            if (rectposy == 500)rectposy = 0;
+            else if (rectposy == 0)rectposy = 500;
+        }
+        if (Door1 == true && Door2 == true)
+        {
+            changeScene(Stage::instance());
+        }
         timer++;
         break;
     }
@@ -113,7 +123,10 @@ void Stage2::update()
 void Stage2::draw()
 {
     GameLib::clear(VECTOR4(1, 1, 1, 1));
-    for (int i = 12; i < 22; ++i)
+    bgManager_->drawGame1(BACK_WHITE);
+    primitive::rect(0, rectposy, 1920, 540, 0, 0, 0, 0, 0, 0, 1);
+
+    for (int i = 12; i < 24; ++i)
     {
         primitive::rect(
             terrain[i].pos,
@@ -122,6 +135,38 @@ void Stage2::draw()
             { 1, 0, 1, 1 }
         );
     }
+
+
+    /*for (int j = 4; j < 6; ++j)
+    {
+        primitive::rect(
+            door[j].pos,
+            door[j].hsize * 2,
+            door[j].hsize, 0,
+            { 1, 0, 1, 1 }
+        );
+    }*/
+
+    GameLib::texture::begin(WHITE_DOOR);
+    GameLib::texture::draw(WHITE_DOOR,
+        840, 775,  //位置
+        0.5f, 0.66f,//大きさ
+        0, 0,       //切り抜き位置
+        240, 360, //切り抜きサイズ
+        0, 0,
+        0
+    );
+    GameLib::texture::end(WHITE_DOOR);
+
+    GameLib::texture::begin(BLACK_DOOR);
+    GameLib::texture::draw(BLACK_DOOR,
+        1738, 235,  //位置
+        0.5f, 0.66f,//大きさ
+        0, 0,       //切り抜き位置
+        240, 360, //切り抜きサイズ
+        0, 0,
+        0
+    );
+    GameLib::texture::end(BLACK_DOOR);
     playerManager()->draw();
 }
-

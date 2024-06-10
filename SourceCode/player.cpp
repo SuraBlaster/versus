@@ -1,11 +1,20 @@
+//******************************************************************************
+//
+//
+//      プレイヤークラス
+//
+//
+//******************************************************************************
+
+//------< インクルード >--------------------------------------------------------
 #include "all.h"
-#include "stage.h"
 using namespace GameLib::input;
 
 //------< using >---------------------------------------------------------------
 using namespace GameLib;
 Player* playerPosition;
 Player2* playerPosition2;
+
 bool death;
 //******************************************************************************
 //
@@ -30,11 +39,10 @@ namespace
 
 }
 
-
 //--------------------------------
 //  直接操作
 //--------------------------------
-void Player::move(OBJ2D* obj,int t )
+void Player::move(OBJ2D* obj, int t)
 {
     using namespace input;  // 関数内で入力処理を行うときに記述する
 
@@ -47,7 +55,6 @@ void Player::move(OBJ2D* obj,int t )
     // 変数
     AnimeData* animeData = nullptr;
     bool onGround = false;          // 地上フラグ
-    
 
     playerPosition1X = obj->position.x;
     playerPosition1Y = obj->position.y;
@@ -56,6 +63,8 @@ void Player::move(OBJ2D* obj,int t )
     {
     case 0:
         //////// 初期設定 ////////
+
+        //アニメの初期設定
         animeData = animePlayer_Up;   // 初期値として下向きのアニメを設定する
 
         // サイズ設定（足元が中心であるため、幅はあたりとして使用する半分・縦はそのままが扱いやすい）
@@ -78,18 +87,17 @@ void Player::move(OBJ2D* obj,int t )
             break;
         case 2:
             min1 = 12;
-            max1 = 21;
+            max1 = 24;
             mindoor1 = 4;
             maxdoor1 = 6;
             break;
         }
-        death = false;
-        obj->state++;
+
         break;
 
     case 1:
         //////// 通常時 ////////
-        
+
         // 毎フレーム毎の初期設定
         onGround = false;   // 地面フラグは毎フレームの最初にfalseにしておき、地面に接していたらtrueを設定する
 
@@ -100,9 +108,12 @@ void Player::move(OBJ2D* obj,int t )
 
         obj->speed.y = (std::max)(obj->speed.y, -SPEED_MAX_Y);
         obj->position.y += obj->speed.y;
+
+
+
         if (t == 1)
         {
-            if (terrain[9].pos.y == 1100)
+            if (terrain[9].pos.y == 1120)
             {
                 num1 = 1;
             }
@@ -110,13 +121,14 @@ void Player::move(OBJ2D* obj,int t )
             {
                 num1 = -1;
             }
-            terrain[9].pos.y = terrain[9].pos.y+ (3 * num1);
-            
+            terrain[9].pos.y = terrain[9].pos.y + (2 * num1);
+
             if (Game::instance()->bgManager()->hitCheck(obj, terrain[21]) || Game::instance()->bgManager()->hitCheck(obj, terrain[22]))
             {
                 death = true;
             }
         }
+
         for (int i = min1; i < max1; ++i)
         {
             if (Game::instance()->bgManager()->hitCheck(obj, terrain[i]))
@@ -134,17 +146,16 @@ void Player::move(OBJ2D* obj,int t )
             }
         }
 
+
+
         //TODO_03 左右入力の取り出し
         switch (STATE(0) & (PAD_LEFT | PAD_RIGHT))
         {
         case PAD_LEFT:  // 左だけが押されている場合
             obj->speed.x -= KASOKU;
-            
-           
             break;
         case PAD_RIGHT: // 右だけが押されている場合
             obj->speed.x += KASOKU;
-           
             break;
         default:        // どちらも押されていないか相殺されている場合
             if (obj->speed.x > 0)
@@ -173,7 +184,7 @@ void Player::move(OBJ2D* obj,int t )
         //TODO_03 X方向移動
         obj->position.x += obj->speed.x;
 
-        
+
         for (int i = min1; i < max1; ++i) {
             if (Game::instance()->bgManager()->hitCheck(obj, terrain[i])) {
                 float dist;
@@ -187,10 +198,12 @@ void Player::move(OBJ2D* obj,int t )
             }
         }
 
+
+
         //TODO_04 ジャンプチェック
         if (onGround == true && TRG(0) & PAD_TRG1)
         {
-            obj->jumpTimer = 20;
+            obj->jumpTimer = 5;
         }
 
         //TODO_04 ジャンプ中
@@ -209,10 +222,10 @@ void Player::move(OBJ2D* obj,int t )
 
         debug::setString("onGround:%d", onGround);
         debug::setString("jumpTimer:%d", obj->jumpTimer);
-       
+
         //TODO_05 エリアチェック
-        const float left = 0 + obj->size.x;
-        const float right = window::getWidth() - obj->size.x;
+        const float left = 0 + obj->size.x / 2;
+        const float right = window::getWidth() - obj->size.x / 2;
 
         if (obj->position.x < 0 + left)
         {
@@ -225,6 +238,8 @@ void Player::move(OBJ2D* obj,int t )
             obj->position.x = right;
             obj->speed.x = 0;
         }
+
+
 
         for (int i = mindoor1; i < maxdoor1; ++i) {
             if (Game::instance()->bgManager()->hitCheck(obj, door[i])) {
@@ -239,6 +254,8 @@ void Player::move(OBJ2D* obj,int t )
 
         break;
     }
+
+
 
     // アニメーション更新
     if (animeData)
@@ -256,7 +273,7 @@ void ErasePlayer::erase(OBJ2D* obj)
     obj->clear();           // OBJ2Dを消去する
 }
 
-void Player2::move(OBJ2D* obj,int t)
+void Player2::move(OBJ2D* obj, int t)
 {
     using namespace input;  // 関数内で入力処理を行うときに記述する
 
@@ -269,7 +286,6 @@ void Player2::move(OBJ2D* obj,int t)
     // 変数
     AnimeData* animeData = nullptr;
     bool onGround = false;          // 地上フラグ
-    
 
     playerPosition2X = obj->position.x;
     playerPosition2Y = obj->position.y;
@@ -278,12 +294,13 @@ void Player2::move(OBJ2D* obj,int t)
     {
     case 0:
         //////// 初期設定 ////////
-       
+
         //アニメの初期設定
         animeData = animePlayer2__Up;   // 初期値として下向きのアニメを設定する
 
         // サイズ設定（足元が中心であるため、幅はあたりとして使用する半分・縦はそのままが扱いやすい）
-        obj->size = VECTOR2(96 / 3, 128);
+        obj->size = VECTOR2(120, 120);
+
         switch (t)
         {
         case 0:
@@ -300,12 +317,12 @@ void Player2::move(OBJ2D* obj,int t)
             break;
         case 2:
             min2 = 12;
-            max2 = 21;
+            max2 = 24;
             mindoor2 = 4;
             maxdoor2 = 6;
             break;
         }
-        death = false;
+
         obj->state++;
 
         break;
@@ -342,13 +359,14 @@ void Player2::move(OBJ2D* obj,int t)
             }
         }
 
-        if (t == 0)
+        if (t == 1)
         {
             if (Game::instance()->bgManager()->hitCheck(obj, terrain[21]) || Game::instance()->bgManager()->hitCheck(obj, terrain[22]))
             {
                 death = true;
             }
         }
+
         //TODO_03 左右入力の取り出し
         switch (STATE(0) & (PAD_LEFT | PAD_RIGHT))
         {
@@ -385,6 +403,7 @@ void Player2::move(OBJ2D* obj,int t)
         //TODO_03 X方向移動
         obj->position.x += obj->speed.x;
 
+
         for (int i = min2; i < max2; ++i) {
             if (Game::instance()->bgManager()->hitCheck(obj, terrain[i])) {
                 float dist;
@@ -396,12 +415,14 @@ void Player2::move(OBJ2D* obj,int t)
                 obj->speed.x = 0;
 
             }
-        }
+        };
+
+
 
         //TODO_04 ジャンプチェック
         if (onGround == true && TRG(0) & PAD_TRG1)
         {
-            obj->jumpTimer = 20;
+            obj->jumpTimer = 5;
         }
 
         //TODO_04 ジャンプ中
@@ -422,8 +443,8 @@ void Player2::move(OBJ2D* obj,int t)
         debug::setString("jumpTimer:%d", obj->jumpTimer);
 
         //TODO_05 エリアチェック
-        const float left = 0 + obj->size.x;
-        const float right = window::getWidth() - obj->size.x;
+        const float left = 0 + obj->size.x / 2;
+        const float right = window::getWidth() - obj->size.x / 2;
 
         if (obj->position.x < 0 + left)
         {
@@ -436,6 +457,7 @@ void Player2::move(OBJ2D* obj,int t)
             obj->position.x = right;
             obj->speed.x = 0;
         }
+
         for (int i = mindoor2; i < maxdoor2; ++i) {
             if (Game::instance()->bgManager()->hitCheck(obj, door[i])) {
                 Door2 = true;
@@ -450,6 +472,9 @@ void Player2::move(OBJ2D* obj,int t)
         break;
     }
 
+
+
+
     // アニメーション更新
     if (animeData)
     {
@@ -457,5 +482,4 @@ void Player2::move(OBJ2D* obj,int t)
         obj->animeUpdate(animeData);
     }
 }
-
 

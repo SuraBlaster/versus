@@ -1,6 +1,4 @@
-#ifndef INCLUDED_SCENE
-#define INCLUDED_SCENE
-
+#pragma once
 
 //******************************************************************************
 //
@@ -25,6 +23,7 @@ protected:
 
 public:
     Scene* execute();   // 実行処理
+
     virtual void init()
     { // 初期化処理
         state = 0;
@@ -33,11 +32,10 @@ public:
     };
     virtual void deinit() {};   // 終了処理
     virtual void update() {};   // 更新処理
-    virtual void draw()   {};   // 描画処理
-    
+    virtual void draw() {};   // 描画処理
 
-    void changeScene(Scene *scene) { nextScene = scene; }   // シーン変更処理
-    Scene *getScene() const { return nextScene; }           // nextSceneのゲッター
+    void changeScene(Scene* scene) { nextScene = scene; }   // シーン変更処理
+    Scene* getScene() const { return nextScene; }           // nextSceneのゲッター
 };
 
 //******************************************************************************
@@ -60,6 +58,3 @@ public:
     void execute(Scene*);  // 実行処理
 };
 
-//******************************************************************************
-
-#endif // !INCLUDED_SCENE

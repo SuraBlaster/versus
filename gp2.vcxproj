@@ -175,6 +175,7 @@
     <ClInclude Include="SourceCode\all.h" />
     <ClInclude Include="SourceCode\Audio.h" />
     <ClInclude Include="SourceCode\bg.h" />
+    <ClInclude Include="SourceCode\clear.h" />
     <ClInclude Include="SourceCode\common.h" />
     <ClInclude Include="SourceCode\game.h" />
     <ClInclude Include="SourceCode\obj2d.h" />
@@ -294,6 +295,7 @@
     <ClCompile Include="GameLib\wnd_proc.cpp" />
     <ClCompile Include="SourceCode\Audio.cpp" />
     <ClCompile Include="SourceCode\bg.cpp" />
+    <ClCompile Include="SourceCode\clear.cpp" />
     <ClCompile Include="SourceCode\game.cpp" />
     <ClCompile Include="SourceCode\main.cpp" />
     <ClCompile Include="SourceCode\obj2d.cpp" />

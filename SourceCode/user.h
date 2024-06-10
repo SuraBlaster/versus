@@ -1,5 +1,4 @@
-#ifndef INCLUDED_USER
-#define INCLUDED_USER
+#pragma once
 
 //******************************************************************************
 //
@@ -42,7 +41,7 @@ inline std::string strBit16(const int n)
 　　　    ：const float& lo 最小値
   　　    ：const float& hi 最大値
     戻り値：const float&    範囲内に収まった数値
-    
+
     assert関数でhiがlo以上であることを確認しておくこと
     インライン関数として使用するため、先頭に inline とつけること
 
@@ -87,7 +86,5 @@ inline const float& clamp(const float& v, const float& lo,
 
     return (std::min)((std::max)(v, lo), hi);
 
-    
-}
 
-#endif // !INCLUDED_USER
+}

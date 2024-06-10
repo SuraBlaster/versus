@@ -8,9 +8,9 @@
 using namespace GameLib::input;
 using namespace GameLib;
 Tutorial Tutorial::instance_tutorial;
-
 Sprite* blackdoor;
 Sprite* whitedoor;
+
 
 void Tutorial::init()
 {
@@ -173,8 +173,8 @@ void Tutorial::draw()
 
     sprite_render(whitedoor, 1680, 300, 0.5f, 0.62f);
 
-    
     sprite_render(blackdoor, 1680, 830, 0.5f, 0.62f);
+
     // ƒvƒŒƒCƒ„[‚Ì•`‰æ
     playerManager()->draw();
 

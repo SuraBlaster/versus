@@ -1,9 +1,9 @@
 #include "stage1.h"
+#include "tutorial.h"
 #include "../GameLib/game_lib.h"
 #include "../GameLib/input_manager.h"
 #include "sprite_data.h"
 #include "common.h"
-#include "stage.h"
 #include "game.h"
 #include "stage.h"
 using namespace GameLib::input;
@@ -11,6 +11,8 @@ using namespace GameLib;
 Stage1 Stage1::instance_Stage1;
 Sprite* kabe;
 Sprite* hari;
+
+
 void Stage1::init()
 {
     Scene::init();	    // 基底クラスのinitを呼ぶ
@@ -21,6 +23,7 @@ void Stage1::init()
     player1_ = new Player; // player1_のインスタンスを作成
     player2_ = new Player2; // player2_のインスタンスを作成
     isPaused = false;   // ポーズフラグの初期化
+    death = false;
     kabe = sprite_load(L"./Data/Images/kabe.png");
     hari = sprite_load(L"./Data/Images/hari.png");
 }
@@ -49,8 +52,8 @@ void Stage1::update()
         //プレイヤーの位置保存
         VECTOR2 player1_position, player2_position;
 
-        /*OBJ2D player1, player2;*/
-        VECTOR2 sa1,sa2;
+        //OBJ2D player1, player2;
+        VECTOR2 sa1, sa2;
 
         // プレイヤーマネージャーの全ての要素をループ
         for (auto& it : *playerManager_->getList())
@@ -59,6 +62,9 @@ void Stage1::update()
             player_count++;
 
             //位置を保存
+            /*if (player_count == 1)player1_position.y = it.position.y;
+            if (player_count == 2)player2_position.y = it.position.y;*/
+
             if (player_count == 1)
             {
                 if (it.position.y < 500)
@@ -71,7 +77,7 @@ void Stage1::update()
                     sa1.y = 1030 - it.position.y;
                     player1_position.y = 1030;
                 }
-               
+
             }
             if (player_count == 2)
             {
@@ -85,11 +91,10 @@ void Stage1::update()
                     sa2.y = 1030 - it.position.y;
                     player2_position.y = 1030;
                 }
-              
-            }
-          
-        }
 
+            }
+
+        }
 
         //初期化
         player_count = 0;
@@ -102,11 +107,14 @@ void Stage1::update()
             player_count++;
 
             //保存した位置を変更
-            if (player_count == 1)it.position.y = player2_position.y-sa1.y;
-            if (player_count == 2)it.position.y = player1_position.y-sa2.y;
+            /*if (player_count == 1)it.position.y = player2_position.y;
+            if (player_count == 2)it.position.y = player1_position.y;*/
+
+            if (player_count == 1)it.position.y = player2_position.y - sa1.y;
+            if (player_count == 2)it.position.y = player1_position.y - sa2.y;
         }
 
-       
+
 
 
 
@@ -127,10 +135,10 @@ void Stage1::update()
 
         // プレイヤー（自分で操作）を追加する
         playerManager()->add(&player, VECTOR2(window::getWidth() / 8, window::getHeight() / 2));
-        playerManager()->add(&player2p, VECTOR2(window::getWidth() / 8, 1000));
+        playerManager()->add(&player2p, VECTOR2(window::getWidth() / 8, 990));
         //playerManager()->add(&player[1], VECTOR2(window::getWidth() / 3, 900));
 
-       
+
         state++;    // 初期化処理の終了
 
         /*fallthrough*/     // case 1:の処理も同時に行う必要があるため、わざとbreak;を記述していない
@@ -141,12 +149,12 @@ void Stage1::update()
         {
             num = 1;
         }
-        else if (terrain[9].pos.y == 1230)
+        else if (terrain[9].pos.y == 1280)
         {
             num = -1;
         }
         terrain[9].pos.y += 2 * num;
-        playerManager()->update(1);
+
         if (death == true)
         {
             for (int i = 1080; i > 0; i--)
@@ -155,7 +163,15 @@ void Stage1::update()
             }
             changeScene(Stage::instance());
         }
+
+        playerManager()->update(1);
+
         timer++;
+        if (TRG(0) & PAD_RKey)
+        {
+            if (rectposy == YUKA)rectposy = 0;
+            else if (rectposy == 0)rectposy = YUKA;
+        }
 
         if (Door1 == true && Door2 == true)
         {
@@ -168,8 +184,8 @@ void Stage1::update()
 
 void Stage1::draw()
 {
-    GameLib::clear(VECTOR4(0, 1, 1, 1));
-
+    GameLib::clear(VECTOR4(1, 1, 1, 1));
+    primitive::rect(0, rectposy, 1920, 540, 0, 0, 0, 0, 0, 0, 1);
     for (int i = 4; i < 12; ++i)
     {
         primitive::rect(
@@ -179,14 +195,29 @@ void Stage1::draw()
             { 1, 0, 1, 1 }
         );
     }
-   
-    for (int i = 500; i < 1360; i += 60)
+
+    for (int i = 2; i < 4; ++i)
     {
-        sprite_render(hari,i, 470, 0.5f, 0.5f);
-        sprite_render(hari,i, 1000, 0.5f, 0.5f);
+        primitive::rect(
+            door[i].pos,
+            door[i].hsize * 2,
+            door[i].hsize, 0,
+            { 1, 0, 1, 1 }
+        );
     }
 
-    sprite_render(kabe, 0, 680,0.5f,0.5f);
+    for (int i = 500; i < 1360; i += 60)
+    {
+        sprite_render(hari, i, 470, 0.5f, 0.5f);
+        sprite_render(hari, i, 1010, 0.5f, 0.5f);
+    }
+
+
+
+    sprite_render(kabe, 0, 680, 0.5f, 0.5f);
+
+    //sprite_render(whitedoor, 10, 780, 0.5f, 0.62f);
+
 
     GameLib::texture::begin(WHITE_DOOR);
     GameLib::texture::draw(WHITE_DOOR,
@@ -210,6 +241,10 @@ void Stage1::draw()
     );
     GameLib::texture::end(BLACK_DOOR);
 
+
+
     // プレイヤーの描画
     playerManager()->draw();
+
+
 }

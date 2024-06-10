@@ -19,6 +19,7 @@ enum TEXNO
     BACK_BLACK,
     BLACK_DOOR,
     WHITE_DOOR,
+
 };
 
 extern GameLib::LoadTexture loadTexture[];

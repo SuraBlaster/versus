@@ -26,7 +26,7 @@ Scene* Scene::execute()
     init();
 
     // ゲームループ
-    while (GameLib::gameLoop(true))    // falseをtrueにするとタイトルバーにフレームレート表示
+    while (GameLib::gameLoop(false))    // falseをtrueにするとタイトルバーにフレームレート表示
     {
         // 入力処理
         input::update();
@@ -60,8 +60,6 @@ Scene* Scene::execute()
     return nextScene;	// 次のシーンを返す
 }
 
-
-
 //******************************************************************************
 //
 //      SceneManagerクラス
@@ -75,12 +73,14 @@ void SceneManager::execute(Scene* scene)
 {
     using namespace GameLib;
 
-    bool isFullScreen = false;	// フルスクリーンにするならtrueに変える
-                                //（Releaseモードのみ）
+    bool isFullScreen = true;	// フルスクリーンにするならtrueに変える
+    //（Releaseモードのみ）
 
-    // ゲームライブラリの初期化処理
+// ゲームライブラリの初期化処理
     GameLib::init(L"ゲームプログラミングⅡ", 1920, 1080, isFullScreen);
+
     audio_init();
+
 #ifndef _DEBUG
     ShowCursor(!isFullScreen);	// フルスクリーン時はカーソルを消す
 #endif
@@ -90,10 +90,8 @@ void SceneManager::execute(Scene* scene)
     {
         scene = scene->execute();
     }
+
     audio_deinit();
     // ゲームライブラリの終了処理
     GameLib::uninit();
 }
-
-//******************************************************************************
-
