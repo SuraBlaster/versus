@@ -91,8 +91,7 @@ void SceneManager::execute(Scene* scene)
         scene = scene->execute();
     }
 
-    audio_deinit()
-        ;
+    audio_deinit();
     // ゲームライブラリの終了処理
     GameLib::uninit();
 }

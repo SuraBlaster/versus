@@ -14,7 +14,7 @@ using namespace GameLib::input;
 using namespace GameLib;
 Player* playerPosition;
 Player2* playerPosition2;
-
+bool death;
 //******************************************************************************
 //
 //      プレイヤー移動処理
@@ -121,6 +121,11 @@ void Player::move(OBJ2D* obj,int t)
                 num1 = -1;
             }
             terrain[9].pos.y = terrain[9].pos.y + (3 * num1);
+
+            if (Game::instance()->bgManager()->hitCheck(obj, terrain[21]) || Game::instance()->bgManager()->hitCheck(obj, terrain[22]))
+            {
+                death = true;
+            }
         }
 
         for (int i = min1; i < max1; ++i)
@@ -353,7 +358,13 @@ void Player2::move(OBJ2D* obj,int t)
             }
         }
         
-        
+        if (t == 1)
+        {
+            if (Game::instance()->bgManager()->hitCheck(obj, terrain[21]) || Game::instance()->bgManager()->hitCheck(obj, terrain[22]))
+            {
+                death = true;
+            }
+        }
 
         //TODO_03 左右入力の取り出し
         switch (STATE(0) & (PAD_LEFT | PAD_RIGHT))

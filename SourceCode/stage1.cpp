@@ -12,6 +12,7 @@ Stage1 Stage1::instance_Stage1;
 Sprite* kabe;
 Sprite* hari;
 
+
 void Stage1::init()
 {
     Scene::init();	    // 基底クラスのinitを呼ぶ
@@ -22,6 +23,7 @@ void Stage1::init()
     player1_ = new Player; // player1_のインスタンスを作成
     player2_ = new Player2; // player2_のインスタンスを作成
     isPaused = false;   // ポーズフラグの初期化
+    death = false;
     kabe = sprite_load(L"./Data/Images/kabe.png");
     hari = sprite_load(L"./Data/Images/hari.png");
 }
@@ -152,6 +154,16 @@ void Stage1::update()
             num = -1;
         }
         terrain[9].pos.y += 3 * num;
+
+        if (death == true)
+        {
+            for (int i = 1080; i > 0; i--)
+            {
+                primitive::rect(0, i, 1920, 1080);
+            }
+            changeScene(Stage::instance());
+        }
+
         playerManager()->update(1);
 
         timer++;
@@ -231,3 +243,5 @@ void Stage1::draw()
 
     
 }
+
+
