@@ -136,15 +136,15 @@ void Stage1::update()
 
     case 1:
         //////// ’Êí‚Ìˆ— ////////
-        if (terrain[9].pos.y == 1100)
+        if (terrain[9].pos.y == 1120)
         {
             num = 1;
         }
-        else if (terrain[9].pos.y == 1280)
+        else if (terrain[9].pos.y == 1230)
         {
             num = -1;
         }
-        terrain[9].pos.y += 3 * num;
+        terrain[9].pos.y += 2 * num;
         playerManager()->update(1);
         if (death == true)
         {
